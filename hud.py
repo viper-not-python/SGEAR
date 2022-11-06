@@ -1,14 +1,16 @@
-from pickle import FRAME
-from xml.dom import INDEX_SIZE_ERR
 import cv2
 import numpy as np
 import datetime
 import math
+import pyaudio
+import struct
+from scipy.fftpack import fft
 
 #video setup
-stream = cv2.VideoCapture(0)
 width = 1280
 height = 720
+
+stream = cv2.VideoCapture(0)
 
 fontsize = 1
 
@@ -17,16 +19,50 @@ view_pic = False
 init = True
 
 #audio setup
-CHUNK = 1024 * 4
+CHUNK = 1024 * 2
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 
 p = pyaudio.PyAudio()
 
-stream = p.open(format = FORMAT, channels = CHANNELS, rate = RATE, input = True, output = True, frames_per_buffer = CHUNK)
+stream_aud = p.open(format = FORMAT, channels = CHANNELS, rate = RATE, input = True, output = True, frames_per_buffer = CHUNK)
+
+#functions setup
+ch_amount = 80
+ch = CHUNK * 2
+ch_parts = math.floor(ch / ch_amount)
+avrg=[]
+for i in range(0, ch_amount):
+    avrg.append(0)
 
 #methods
+def draw_line(x, y, direction, length, thickness, blue, green, red):
+    direction = direction *-1
+
+    alpha = (direction / 180) * math.pi 
+    beta = (direction / 180) * math.pi
+    cos = math.cos(alpha)
+    sin = math.sin(beta)
+
+    cos = round(cos * length)
+    sin = round(sin * length)
+
+    cv2.line(frame, (x,y), (cos + x, sin + y), (blue, green, red), thickness)
+
+def soundmeter():
+    
+    data = stream_aud.read(CHUNK)
+
+    data_int = struct.unpack(str(2 * CHUNK) + 'B', data)
+    for i in range(1, ch_amount+1):
+        avrg[i-1] = round(sum(data_int[(i-1) * ch_amount : i * ch_amount]) / ch_amount)
+        x = 300
+        y = 300
+        multiplier = 0.1
+        length = avrg[i-1] * multiplier
+        draw_line(x + i*2, y, 90, length, 1, 0, 255, 0)
+
 def get_master_text():
     try:
         with open ("master_text.txt", "r") as ms:
@@ -82,10 +118,12 @@ def sharpen(frame):
 
 
 while True:
-    _,frame = stream.read()
+    ret, frame = stream.read()
+
     cv2.circle(frame, (320, 950), 500, (0, 155, 0), 2)
     cv2.circle(frame, (320, -470), 500, (0, 155, 0), 2)
 
+    soundmeter()
 
     if view_pic == True:
         try:
@@ -115,10 +153,10 @@ while True:
 
     frame = sharpen(frame)
     
-    time = str(datetime.datetime.now())
-    time = time[11:22]
+    time_now = str(datetime.datetime.now())
+    time_now = time_now[11:22]
     
-    cv2.putText(frame, time, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
+    cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
     voltage = str(battery_voltage())
     battery_status = voltage + " V"
