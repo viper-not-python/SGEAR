@@ -56,7 +56,7 @@ def draw_line(x, y, direction, length, thickness, blue, green, red):
     cv2.line(frame, (x,y), (cos + x, sin + y), (blue, green, red), thickness)
 
 def soundmeter():
-    data = stream_aud.read(CHUNK)
+    data = stream_aud.read(CHUNK, exception_on_overflow=False)
     data_int = struct.unpack(str(2 * CHUNK) + 'B', data)
     
     #y_fft = fft(data_int)
