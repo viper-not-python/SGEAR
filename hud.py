@@ -29,7 +29,7 @@ p = pyaudio.PyAudio()
 stream_aud = p.open(format = FORMAT, channels = CHANNELS, rate = RATE, input = True, output = True, frames_per_buffer = CHUNK)
 
 #functions setup
-ch_amount = 256
+ch_amount = 128
 ch = CHUNK * 2
 ch_parts = math.floor(ch / ch_amount)
 avrg=[]
