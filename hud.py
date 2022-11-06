@@ -5,6 +5,7 @@ import numpy as np
 import datetime
 import math
 
+#video setup
 stream = cv2.VideoCapture(0)
 width = 1280
 height = 720
@@ -15,6 +16,17 @@ view_pic = False
 
 init = True
 
+#audio setup
+CHUNK = 1024 * 4
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 44100
+
+p = pyaudio.PyAudio()
+
+stream = p.open(format = FORMAT, channels = CHANNELS, rate = RATE, input = True, output = True, frames_per_buffer = CHUNK)
+
+#methods
 def get_master_text():
     try:
         with open ("master_text.txt", "r") as ms:
