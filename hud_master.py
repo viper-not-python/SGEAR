@@ -32,3 +32,9 @@ while True:
     if x == "pic":
         with open ("status.txt", "w") as status:
             status.write(x)
+    if x == "sound":
+        with open ("sound.txt", "w") as sound:
+            sound.write(x)
+    if x == "nosound":
+        with open ("sound.txt", "w") as sound:
+            sound.write(x)

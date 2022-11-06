@@ -29,12 +29,17 @@ p = pyaudio.PyAudio()
 stream_aud = p.open(format = FORMAT, channels = CHANNELS, rate = RATE, input = True, output = True, frames_per_buffer = CHUNK)
 
 #functions setup
-ch_amount = 80
+ch_amount = 128
 ch = CHUNK * 2
 ch_parts = math.floor(ch / ch_amount)
 avrg=[]
 for i in range(0, ch_amount):
     avrg.append(0)
+
+
+time_now = str(datetime.datetime.now())
+time_now = time_now[11:22]
+time_then = None
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -51,17 +56,25 @@ def draw_line(x, y, direction, length, thickness, blue, green, red):
     cv2.line(frame, (x,y), (cos + x, sin + y), (blue, green, red), thickness)
 
 def soundmeter():
-    
     data = stream_aud.read(CHUNK)
-
     data_int = struct.unpack(str(2 * CHUNK) + 'B', data)
-    for i in range(1, ch_amount+1):
-        avrg[i-1] = round(sum(data_int[(i-1) * ch_amount : i * ch_amount]) / ch_amount)
-        x = 300
-        y = 300
-        multiplier = 0.1
-        length = avrg[i-1] * multiplier
-        draw_line(x + i*2, y, 90, length, 1, 0, 255, 0)
+    
+    #y_fft = fft(data_int)
+    #y_fft = np.abs(y_fft[0:CHUNK])
+    ##for i in range(0, len(y_fft)):
+    ##    with open ("spectrum.log", "a") as sp:
+    ##        out = str(f"{i}  :   {y_fft[i]}    ")
+    ##        sp.write(out)640
+    ##input()
+
+    if time_now != time_then:
+        for i in range(1, ch_amount+1):
+            avrg[i-1] = round(sum(data_int[(i-1) * ch_parts : i * ch_parts]) / ch_parts)
+            x = 128
+            y = 400
+            multiplier = 0.2
+            length = avrg[i-1] * multiplier
+            draw_line(x + i*3, y, 90, length, 1, 0, 255, 0)
 
 def get_master_text():
     try:
@@ -123,7 +136,14 @@ while True:
     cv2.circle(frame, (320, 950), 500, (0, 155, 0), 2)
     cv2.circle(frame, (320, -470), 500, (0, 155, 0), 2)
 
-    soundmeter()
+    with open ("sound.txt", "r") as sound:
+        s = sound.read()
+        if s == "sound":
+            soundmeter()
+        else:
+            pass
+
+    time_then = time_now
 
     if view_pic == True:
         try:
