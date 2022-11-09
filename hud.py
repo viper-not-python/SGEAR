@@ -134,6 +134,8 @@ def sharpen(frame):
 
 
 while True:
+    ret, frame = stream.read()
+
     with open ("cam.txt", "r") as cam:
         c = cam.read()
         if c == "c1":
@@ -147,8 +149,6 @@ while True:
     #            except:
     #                pass
     #            cs = 0
-
-    ret, frame = stream.read()
 
     cv2.circle(frame, (320, 950), 500, (0, 155, 0), 2)
     cv2.circle(frame, (320, -470), 500, (0, 155, 0), 2)
