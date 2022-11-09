@@ -7,8 +7,6 @@ import struct
 from scipy.fftpack import fft
 
 #video setup
-#width = int(input("width: "))
-#height = int(input("height: "))
 width = 1024
 height = 720
 
@@ -134,21 +132,21 @@ def sharpen(frame):
 
 
 while True:
-    ret, frame = stream.read()
-
-    with open ("cam.txt", "r") as cam:
-        c = cam.read()
-        if c == "c1":
-            if cs == 0:
-                stream = cv2.VideoCapture(0)
-                cs = 1
+    #with open ("cam.txt", "r") as cam:
+    #    c = cam.read()
+    #    if c == "c1":
+    #        if cs == 0:
+    #            stream = cv2.VideoCapture(0)
+    #            cs = 1
     #    if c == "c2":
     #        if cs == 1:
     #            try:
-    #                stream = cv2.VideoCapture(2)
+    #                stream = cv2.VideoCapture(1)
     #            except:
     #                pass
     #            cs = 0
+
+    ret, frame = stream.read()
 
     cv2.circle(frame, (320, 950), 500, (0, 155, 0), 2)
     cv2.circle(frame, (320, -470), 500, (0, 155, 0), 2)
