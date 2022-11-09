@@ -134,12 +134,12 @@ def sharpen(frame):
 
 
 while True:
-    #with open ("cam.txt", "r") as cam:
-    #    c = cam.read()
-    #    if c == "c1":
-    #        if cs == 0:
-    #            stream = cv2.VideoCapture(0)
-    #            cs = 1
+    with open ("cam.txt", "r") as cam:
+        c = cam.read()
+        if c == "c1":
+            if cs == 0:
+                stream = cv2.VideoCapture(0)
+                cs = 1
     #    if c == "c2":
     #        if cs == 1:
     #            try:
