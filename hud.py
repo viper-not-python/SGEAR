@@ -8,7 +8,7 @@ from scipy.fftpack import fft
 
 #video setup
 width = 1024
-height = 768
+height = 720
 
 stream = cv2.VideoCapture(0)
 
@@ -171,7 +171,15 @@ while True:
 
     frame = cv2.resize(frame, (width, height))
 
-    frame = sharpen(frame)
+    with open ("sharpen.txt", "r") as sharpen_:
+        sh = sharpen_.read()
+        if sh == "sharpen":
+            sharpen_img = False
+        if sh == "nosharpen":
+            sharpen_img = True
+        
+    if sharpen_img == True:
+        frame = sharpen(frame)
     
     time_now = str(datetime.datetime.now())
     time_now = time_now[11:22]

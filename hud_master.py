@@ -38,3 +38,9 @@ while True:
     if x == "nosound":
         with open ("sound.txt", "w") as sound:
             sound.write(x)
+    if x == "sharpen":
+        with open ("sharpen.txt", "w") as sh:
+            sh.write(x)
+    if x == "nosharpen":
+        with open ("sharpen.txt", "w") as sh:
+            sh.write(x)
