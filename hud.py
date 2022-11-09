@@ -7,8 +7,8 @@ import struct
 from scipy.fftpack import fft
 
 #video setup
-width = 1024
-height = 720
+width = input("width: ")
+height = input("height: ")
 
 stream = cv2.VideoCapture(0)
 global cs
