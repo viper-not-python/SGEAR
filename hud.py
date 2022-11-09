@@ -11,6 +11,8 @@ width = 1024
 height = 720
 
 stream = cv2.VideoCapture(0)
+global cs
+cs = 0
 
 fontsize = 1
 
@@ -118,7 +120,6 @@ def get_master_text():
     cv2.putText(frame, text2, (930, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
     cv2.putText(frame, text3, (930, 696), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
-
 def battery_voltage():
     voltage = 11.4
     return voltage
@@ -203,6 +204,20 @@ while True:
             view_pic = True
 
     cv2.imshow("", frame)
+    
+    with open ("cam.txt", "r") as cam:
+        c = cam.read()
+        if c == "c1":
+            if cs == 0:
+                stream = cv2.VideoCapture(0)
+                cs = 1
+        if c == "c2":
+            if cs == 1:
+                try:
+                    stream = cv2.VideoCapture(1)
+                except:
+                    pass
+                cs = 0
     
     if (cv2.waitKey(1)==ord("q")):
         break

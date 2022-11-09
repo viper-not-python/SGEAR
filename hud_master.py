@@ -44,3 +44,9 @@ while True:
     if x == "nosharpen":
         with open ("sharpen.txt", "w") as sh:
             sh.write(x)
+    if x == "c1":
+        with open ("cam.txt", "w") as c:
+            c.write(x)
+    if x == "c2":
+        with open ("cam.txt", "w") as c:
+            c.write(x)
