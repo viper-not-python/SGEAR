@@ -11,8 +11,6 @@ width = 1024
 height = 720
 
 stream = cv2.VideoCapture(0)
-global cs
-cs = 0
 
 fontsize = 1
 
@@ -132,26 +130,12 @@ def sharpen(frame):
 
 
 while True:
-    #with open ("cam.txt", "r") as cam:
-    #    c = cam.read()
-    #    if c == "c1":
-    #        if cs == 0:
-    #            stream = cv2.VideoCapture(0)
-    #            cs = 1
-    #    if c == "c2":
-    #        if cs == 1:
-    #            try:
-    #                stream = cv2.VideoCapture(1)
-    #            except:
-    #                pass
-    #            cs = 0
-
     ret, frame = stream.read()
 
     cv2.circle(frame, (320, 950), 500, (0, 155, 0), 2)
     cv2.circle(frame, (320, -470), 500, (0, 155, 0), 2)
 
-    with open ("sound.txt", "r") as sound:
+    with open("sound.txt", "r") as sound:
         s = sound.read()
         if s == "sound":
             soundmeter()
