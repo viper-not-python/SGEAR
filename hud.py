@@ -11,6 +11,7 @@ width = 1024
 height = 720
 
 stream = cv2.VideoCapture(0)
+stream1 = cv2.VideoCapture(2)
 global cs
 cs = 0
 
@@ -147,9 +148,13 @@ while True:
     #            cs = 0
 
     ret, frame = stream.read()
+    ret1, frame1 = stream1.read()
 
     cv2.circle(frame, (320, 950), 500, (0, 155, 0), 2)
     cv2.circle(frame, (320, -470), 500, (0, 155, 0), 2)
+
+    cv2.circle(frame1, (320, 950), 500, (0, 155, 0), 2)
+    cv2.circle(frame1, (320, -470), 500, (0, 155, 0), 2)
 
     with open ("sound.txt", "r") as sound:
         s = sound.read()
@@ -185,6 +190,7 @@ while True:
             pass
 
     frame = cv2.resize(frame, (width, height))
+    frame1 = cv2.resize(frame1, (width, height))
 
     with open ("sharpen.txt", "r") as sharpen_:
         sh = sharpen_.read()
@@ -195,18 +201,22 @@ while True:
         
     if sharpen_img == True:
         frame = sharpen(frame)
+        frame1 = sharpen(frame1)
     
     time_now = str(datetime.datetime.now())
     time_now = time_now[11:22]
     
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
+    cv2.putText(frame1, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
     voltage = str(battery_voltage())
     battery_status = voltage + " V"
     cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_percentage
+    cv2.putText(frame1, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_percentage
     if battery_voltage() <= 10:
         battery_warning = "LOW BATTERY VOLTAGE!"
         cv2.putText(frame, battery_warning, (80,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 0, 255), 1)   #battery_percentage_warning
+        cv2.putText(frame1, battery_warning, (80,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 0, 255), 1)   #battery_percentage_warning
 
     get_master_text()   #text from hud_master.py
     
@@ -218,9 +228,11 @@ while True:
             view_pic = True
 
     cv2.imshow("", frame)
+    cv2.imshow("", frame1)
     
     if (cv2.waitKey(1)==ord("q")):
         break
 
 stream.release()
+stream1.release()
 cv2.destroyAllWindows()
