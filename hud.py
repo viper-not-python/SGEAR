@@ -227,8 +227,8 @@ while True:
         if stat == "pic":
             view_pic = True
 
-    cv2.imshow("", frame)
-    cv2.imshow("", frame1)
+    cv2.imshow("cam1", frame)
+    cv2.imshow("cam2", frame1)
     
     if (cv2.waitKey(1)==ord("q")):
         break
