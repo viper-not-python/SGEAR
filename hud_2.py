@@ -10,7 +10,7 @@ from scipy.fftpack import fft
 width = 1024
 height = 720
 
-stream = cv2.VideoCapture(0)
+stream = cv2.VideoCapture(2)
 global cs
 cs = 0
 
