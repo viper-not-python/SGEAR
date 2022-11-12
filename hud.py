@@ -9,7 +9,7 @@ from scipy.fftpack import fft
 #video setup
 width = 1280
 height = 720
-heigth = height - 100
+heigth = height - 200
 
 stream = cv2.VideoCapture(0)
 
