@@ -126,13 +126,6 @@ def get_master_text():
     cv2.putText(frame, text2, (930, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
     cv2.putText(frame, text3, (930, 696), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
-def battery_voltage():
-    data = SerialIn.readline()
-    data = data.decode()
-    data = data[0:5]
-    voltage = data
-    return voltage
-
 def sharpen(frame):
     sharpen_filter = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])    
     frame = cv2.filter2D(frame, ddepth=-1, kernel=sharpen_filter)
@@ -196,7 +189,10 @@ while True:
     
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
-    voltage = battery_voltage()
+    data = SerialIn.readline()
+    data = data.decode()
+    data = data[0:5]
+    voltage = data
     battery_status = voltage + " V"
     cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
 
