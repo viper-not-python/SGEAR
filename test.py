@@ -1,5 +1,3 @@
+import serial
 
-
-text = "hallo"
-
-print(text[-2:])
+SerialIn = serial.Serial("/dev/ttyUSB0",9600)

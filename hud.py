@@ -6,6 +6,7 @@ import pyaudio
 import struct
 import RPi.GPIO as GPIO
 from scipy.fftpack import fft
+import serial
 
 #video setup
 width = 1280
@@ -42,9 +43,11 @@ time_now = str(datetime.datetime.now())
 time_now = time_now[11:22]
 time_then = None
 
-GPIO.setmode(GPIO.BOARD)
-bat_probe = 3
-GPIO.setup(bat_probe, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+#GPIO.setmode(GPIO.BOARD)
+#bat_probe = 3
+#GPIO.setup(bat_probe, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+
+SerialIn = serial.Serial("/dev/ttyUSB0",9600)
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -124,7 +127,10 @@ def get_master_text():
     cv2.putText(frame, text3, (930, 696), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
 def battery_voltage():
-    voltage = None
+    data = SerialIn.readline()
+    data = data.decode()
+    data = data[0:5]
+    voltage = data
     return voltage
 
 def sharpen(frame):
@@ -190,12 +196,9 @@ while True:
     
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
-    voltage = str(battery_voltage())
+    voltage = battery_voltage()
     battery_status = voltage + " V"
-    cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_percentage
-    if battery_voltage() <= 10:
-        battery_warning = "LOW BATTERY VOLTAGE!"
-        cv2.putText(frame, battery_warning, (80,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 0, 255), 1)   #battery_percentage_warning
+    cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
 
     get_master_text()   #text from hud_master.py
     
