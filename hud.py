@@ -189,12 +189,15 @@ while True:
     
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
-    data = SerialIn.readline()
-    data = data.decode()
-    data = data[0:5]
-    voltage = data
-    battery_status = voltage + " V"
-    cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
+    try:
+        data = SerialIn.readline()
+        data = data.decode()
+        data = data[0:5]
+        voltage = data
+        battery_status = voltage + " V"
+        cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
+    except:
+        pass
 
     get_master_text()   #text from hud_master.py
     
