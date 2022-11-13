@@ -124,7 +124,7 @@ def get_master_text():
     cv2.putText(frame, text3, (930, 696), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
 def battery_voltage():
-    voltage = GPIO.input(bat_probe)
+    voltage = None
     return voltage
 
 def sharpen(frame):
@@ -213,3 +213,4 @@ while True:
 
 stream.release()
 cv2.destroyAllWindows()
+GPIO.cleanup()
