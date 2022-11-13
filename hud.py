@@ -4,6 +4,7 @@ import datetime
 import math
 import pyaudio
 import struct
+import RPi.GPIO as GPIO
 from scipy.fftpack import fft
 
 #video setup
@@ -40,6 +41,10 @@ for i in range(0, ch_amount):
 time_now = str(datetime.datetime.now())
 time_now = time_now[11:22]
 time_then = None
+
+GPIO.setmode(GPIO.BOARD)
+bat_probe = 3
+GPIO.setup(bat_probe, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -119,7 +124,7 @@ def get_master_text():
     cv2.putText(frame, text3, (930, 696), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
 def battery_voltage():
-    voltage = 11.4
+    voltage = GPIO.input(bat_probe)
     return voltage
 
 def sharpen(frame):
