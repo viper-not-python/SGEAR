@@ -47,8 +47,10 @@ time_then = None
 #bat_probe = 3
 #GPIO.setup(bat_probe, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
-SerialIn = serial.Serial("/dev/ttyUSB0",9600)
-
+try:
+    SerialIn = serial.Serial("/dev/ttyUSB0",9600)
+except:
+    pass
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
     direction = direction *-1
