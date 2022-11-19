@@ -198,12 +198,19 @@ while True:
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
     try:
-        test = get_data("int")
-        print(type(test))
         voltage = get_data("str")[0:4]
         voltage = voltage[0:2] + "." + voltage [2:4]
         battery_status = voltage + " V"
         cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
+    except:
+        pass
+
+    try:
+        dta = get_data("str")
+        i1 = dta.find("u") + 1
+        i2 = dta.find("x")
+        distance = dta[i1:i2]
+        print(distance)
     except:
         pass
 
