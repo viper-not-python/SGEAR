@@ -138,7 +138,7 @@ def get_data(type_):
     if type_ == "str":
         return data
     if type_ == "int":
-        int(data)
+        data = int(data)
         return data
 
 while True:
