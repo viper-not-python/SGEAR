@@ -43,10 +43,6 @@ time_now = str(datetime.datetime.now())
 time_now = time_now[11:22]
 time_then = None
 
-#GPIO.setmode(GPIO.BOARD)
-#bat_probe = 3
-#GPIO.setup(bat_probe, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-
 SerialIn = serial.Serial("/dev/ttyUSB0",9600)
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -209,8 +205,9 @@ while True:
         dta = get_data("str")
         i1 = dta.find("u") + 1
         i2 = dta.find("x")
-        distance = dta[i1:i2]
-        print(distance)
+        distance_str = dta[i1:i2]
+        distance = int(distance_str)
+        cv2.putText(frame, distance_str, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #distance
     except:
         pass
 
