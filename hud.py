@@ -199,8 +199,8 @@ while True:
 
     try:
         voltage = get_data("str")[0:4]
+        voltage = voltage[0:2] + "." + voltage [2:4]
         battery_status = voltage + " V"
-        print(battery_status)
         cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
     except:
         pass
