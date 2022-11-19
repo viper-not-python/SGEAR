@@ -43,7 +43,11 @@ time_now = str(datetime.datetime.now())
 time_now = time_now[11:22]
 time_then = None
 
-SerialIn = serial.Serial("/dev/ttyUSB0",9600)
+try:
+    SerialIn = serial.Serial("/dev/ttyUSB0",9600)
+    ser = True
+except:
+    ser = False
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
     direction = direction *-1
@@ -193,26 +197,29 @@ while True:
     
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
-    try:
-        voltage = get_data("str")[0:4]
-        voltage = voltage[0:2] + "." + voltage [2:4]
-        battery_status = voltage + " V"
-        cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
-    except:
-        pass
+    if ser == True:
+        try:
+            voltage = get_data("str")[0:4]
+            voltage = voltage[0:2] + "." + voltage [2:4]
+            battery_status = voltage + " V"
+            cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
+        except:
+            ser = False
 
-    try:
-        dta = get_data("str")
-        i1 = dta.find("u") + 1
-        i2 = dta.find("x")
-        distance_str = dta[i1:i2]
-        distance = int(distance_str)
-        distance_str = distance_str + "cm"
-        if distance == 0:
-            distance_str = "error"
-        cv2.putText(frame, distance_str, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #distance
-    except:
-        pass
+        try:
+            dta = get_data("str")
+            i1 = dta.find("u") + 1
+            i2 = dta.find("x")
+            distance_str = dta[i1:i2]
+            distance = int(distance_str)
+            distance_str = distance_str + "cm"
+            if distance == 0:
+                distance_str = "error"
+            cv2.putText(frame, distance_str, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #distance
+        except:
+            ser = False
+    else:
+        cv2.putText(frame, "SER = FALSE", (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
     get_master_text()   #text from hud_master.py
     
