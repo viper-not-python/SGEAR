@@ -4,8 +4,8 @@ import datetime
 import math
 import pyaudio
 import struct
-import RPi.GPIO as GPIO
-from scipy.fftpack import fft
+#import RPi.GPIO as GPIO
+#from scipy.fftpack import fft
 import serial
 
 #video setup
@@ -64,11 +64,11 @@ def soundmeter():
     
     #y_fft = fft(data_int)
     #y_fft = np.abs(y_fft[0:CHUNK])
-    ##for i in range(0, len(y_fft)):
-    ##    with open ("spectrum.log", "a") as sp:
-    ##        out = str(f"{i}  :   {y_fft[i]}    ")
-    ##        sp.write(out)640
-    ##input()
+    #for i in range(0, len(y_fft)):
+    #    with open ("spectrum.log", "a") as sp:
+    #        out = str(f"{i}  :   {y_fft[i]}    ")
+    #        sp.write(out)640
+    #input()
 
     if time_now != time_then:
         for i in range(1, ch_amount+1):
@@ -227,4 +227,4 @@ while True:
 
 stream.release()
 cv2.destroyAllWindows()
-GPIO.cleanup()
+#GPIO.cleanup()
