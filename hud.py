@@ -207,6 +207,7 @@ while True:
         i2 = dta.find("x")
         distance_str = dta[i1:i2]
         distance = int(distance_str)
+        distance_str = distance_str + "cm"
         cv2.putText(frame, distance_str, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #distance
     except:
         pass
