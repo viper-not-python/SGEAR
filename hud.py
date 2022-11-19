@@ -191,9 +191,8 @@ while True:
     try:
         data = SerialIn.readline()
         data = data.decode()
-        data = int(data)
-        voltage = data[0:3]
-        print(voltage)
+        voltage = data[0:4]
+        voltage = int(voltage)
         battery_status = voltage + " V"
         cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
     except:
