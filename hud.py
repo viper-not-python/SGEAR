@@ -198,6 +198,9 @@ while True:
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
     try:
+        test = get_data("int")
+        tp = type(test)
+        print(tp + " " + test)
         voltage = get_data("str")[0:4]
         voltage = voltage[0:2] + "." + voltage [2:4]
         battery_status = voltage + " V"
