@@ -131,6 +131,15 @@ def sharpen(frame):
 
     return frame
 
+def get_data(type_):
+    data = SerialIn.readline()
+    data = data.decode()
+    
+    if type_ == "str":
+        return data
+    if type_ == "int":
+        int(data)
+        return data
 
 while True:
     ret, frame = stream.read()
@@ -189,11 +198,7 @@ while True:
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
     try:
-        data = SerialIn.readline()
-        data = data.decode()
-        voltage = data[0:4]
-        print(voltage)
-        voltage = int(voltage)
+        voltage = get_data("str")[0:4]
         battery_status = voltage + " V"
         print(battery_status)
         cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
