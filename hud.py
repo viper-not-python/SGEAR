@@ -208,6 +208,8 @@ while True:
         distance_str = dta[i1:i2]
         distance = int(distance_str)
         distance_str = distance_str + "cm"
+        if distance == 0:
+            distance_str = "error"
         cv2.putText(frame, distance_str, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #distance
     except:
         pass
