@@ -199,8 +199,7 @@ while True:
 
     try:
         test = get_data("int")
-        tp = type(test)
-        print(tp + " " + test)
+        print(type(test))
         voltage = get_data("str")[0:4]
         voltage = voltage[0:2] + "." + voltage [2:4]
         battery_status = voltage + " V"
