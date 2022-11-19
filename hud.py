@@ -48,6 +48,7 @@ try:
     ser = True
 except:
     ser = False
+
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
     direction = direction *-1
