@@ -1,19 +1,17 @@
-import datetime
-i = 0
-#while True:
-    
-#    #fps_time_now = int(str(datetime.datetime.now())[11:23])
-#    #fps_time_diff = int(str(datetime.datetime.now())[11:23])
-    
-    
-#    print(type(datetime.datetime.now()))
-while i < 5:
-    a = datetime.datetime.now()
-    b = datetime.datetime.now()
-    delta = b - a
-    delta = float(delta.total_seconds())
+import cv2
+stream = cv2.VideoCapture(0)
 
-    fps = 1 / delta
+width = 1280
+height = 660
 
-    print(f"delta: {delta} fps: {fps}")
-    i = i+1
+while True:
+    ret, frame = stream.read()
+    frame = cv2.resize(frame, (width, height))
+
+    cv2.imshow("", frame)
+    
+    if (cv2.waitKey(1)==ord("q")):
+        break
+
+stream.release()
+cv2.destroyAllWindows()

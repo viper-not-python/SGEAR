@@ -17,9 +17,7 @@ stream = cv2.VideoCapture(0)
 
 fontsize = 1
 
-view_pic = False
-
-init = True
+#view_pic = False
 
 ##audio setup
 #CHUNK = 1024 * 2
