@@ -7,6 +7,7 @@ import struct
 #import RPi.GPIO as GPIO
 #from scipy.fftpack import fft
 import serial
+import time
 
 #video setup
 width = 1280
@@ -42,6 +43,9 @@ for i in range(0, ch_amount):
 time_now = str(datetime.datetime.now())
 time_now = time_now[11:22]
 time_then = None
+
+a = datetime.datetime.now()
+time.sleep(0.001)
 
 try:
     SerialIn = serial.Serial("/dev/ttyUSB0",9600)
@@ -144,9 +148,20 @@ def get_data(type_):
 
 while True:
     ret, frame = stream.read()
+    frame = cv2.resize(frame, (width, height))
 
-    cv2.circle(frame, (320, 950), 500, (0, 155, 0), 2)
-    cv2.circle(frame, (320, -470), 500, (0, 155, 0), 2)
+    b = datetime.datetime.now()
+    delta = b - a
+    delta = float(delta.total_seconds())
+
+    fps = int(1 / delta)
+    fps_str = str(fps) + "fps"
+    cv2.putText(frame, fps_str, (225,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    
+    a = datetime.datetime.now()
+
+    cv2.circle(frame, (640, height + 1050), 1100, (0, 155, 0), 2)   #unten
+    cv2.circle(frame, (640, -1050), 1100, (0, 155, 0), 2)   #oben
 
     with open("sound.txt", "r") as sound:
         s = sound.read()
@@ -180,8 +195,6 @@ while True:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
         except:
             pass
-
-    frame = cv2.resize(frame, (width, height))
 
     with open ("sharpen.txt", "r") as sharpen_:
         sh = sharpen_.read()
