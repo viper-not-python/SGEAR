@@ -26,6 +26,7 @@ while True:
                 battery_status = voltage + " V"
                 with open("serial/voltage.txt", "w") as v:    #battery_voltage
                     v.write(battery_status)
+                    print(battery_status)
             except:
                 ser = False
 
@@ -40,6 +41,7 @@ while True:
                     distance_str = "error"
                 with open("serial/distance.txt", "w") as d:    #distance
                     d.write(distance_str)
+                    print(distance_str)
             except:
                 ser = False
     else:
