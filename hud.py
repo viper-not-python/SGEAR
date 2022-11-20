@@ -16,7 +16,7 @@ width = 1280
 height = 660
 
 width = 640
-height = 420
+height = 410
 
 stream = cv2.VideoCapture(0)
 
