@@ -1,4 +1,4 @@
-from serial import *
+import serial
 
 #try:
 #    SerialIn = serial.Serial("/dev/ttyUSB0",9600)
