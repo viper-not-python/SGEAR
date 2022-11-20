@@ -125,9 +125,9 @@ def get_master_text():
         index_short = index_short + 25 * i
         index_short = index_short +1
         cv2.putText(frame, text[index_short : index], (0, 75 + i * 25), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
-    cv2.putText(frame, text1, (0, 696), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    cv2.putText(frame, text1, (0, 405), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
     cv2.putText(frame, text2, (465, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1) #930
-    cv2.putText(frame, text3, (465, 400), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    cv2.putText(frame, text3, (465, 405), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
 def sharpen(frame):
     sharpen_filter = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])    
