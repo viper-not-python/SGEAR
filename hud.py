@@ -156,9 +156,6 @@ while True:
     cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
     cv2.putText(frame, distance, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
-    cv2.circle(frame, (640, height + 1050), 1100, (0, 155, 0), 2)   #unten
-    cv2.circle(frame, (640, -1050), 1100, (0, 155, 0), 2)   #oben
-
     #with open("sound.txt", "r") as sound:
     #    s = sound.read()
     #    if s == "sound":
