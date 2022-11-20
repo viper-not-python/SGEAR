@@ -1,4 +1,5 @@
 import serial
+import time
 
 try:
     SerialIn = serial.Serial("/dev/ttyUSB0",9600)
