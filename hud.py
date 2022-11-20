@@ -150,7 +150,7 @@ while True:
 
     with open("serial/voltage.txt", "r") as v:
         battery_status = v.read()
-    with open("serial/distance", "r") as d:
+    with open("serial/distance.txt", "r") as d:
         distance = d.read()
     cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
     cv2.putText(frame, distance, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
