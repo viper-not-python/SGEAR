@@ -32,12 +32,12 @@ init = True
 #stream_aud = p.open(format = FORMAT, channels = CHANNELS, rate = RATE, input = True, output = True, frames_per_buffer = CHUNK)
 
 #functions setup
-ch_amount = 128
-ch = CHUNK * 2
-ch_parts = math.floor(ch / ch_amount)
-avrg=[]
-for i in range(0, ch_amount):
-    avrg.append(0)
+#ch_amount = 128
+#ch = CHUNK * 2
+#ch_parts = math.floor(ch / ch_amount)
+#avrg=[]
+#for i in range(0, ch_amount):
+#    avrg.append(0)
 
 
 time_now = str(datetime.datetime.now())
