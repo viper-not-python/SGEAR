@@ -8,6 +8,7 @@ except:
     ser = False
     print("ser = false")
 
+SerialIn = serial.Serial("/dev/ttyUSB0",9600)
 def get_data(type_):
     data = SerialIn.readline()
     data = data.decode()
