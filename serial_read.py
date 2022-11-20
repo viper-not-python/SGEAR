@@ -46,8 +46,5 @@ while True:
             except:
                 ser = False
     else:
-        try:
-            SerialIn = serial.Serial("/dev/ttyUSB0",9600)
-            ser = True
-        except:
-            ser = False
+        print("disconnected")
+        break()
