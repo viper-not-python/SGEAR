@@ -1,4 +1,3 @@
-import subprocess
 import cv2
 import numpy as np
 import datetime
@@ -10,8 +9,7 @@ import math
 import time
 
 #python setup
-subprocess.run("python serial_read.py", shell=True)
-
+#subprocess.run("python serial_read.py", shell=True)
 
 #video setup
 width = 1280
