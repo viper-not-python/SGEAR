@@ -115,14 +115,14 @@ def get_master_text():
 
     l = len(text)
     
-    paragraphs = math.ceil(l / 24)
+    paragraphs = math.ceil(l / 14)
 
     for i in range(0, paragraphs):
-        index = text[25 * (i + 1) :].find(" ")
-        index = index + 25 * (i +1)
+        index = text[15 * (i + 1) :].find(" ")
+        index = index + 15 * (i +1)
         index = index +1
-        index_short = text[25 * i :].find(" ")
-        index_short = index_short + 25 * i
+        index_short = text[15 * i :].find(" ")
+        index_short = index_short + 15 * i
         index_short = index_short +1
         cv2.putText(frame, text[index_short : index], (0, 75 + i * 25), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
     cv2.putText(frame, text1, (0, 405), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
