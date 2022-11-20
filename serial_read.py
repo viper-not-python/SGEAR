@@ -5,9 +5,10 @@ try:
     SerialIn = serial.Serial("/dev/ttyUSB0",9600)
     ser = True
     print("ser = true")
-except:
+except Exception as e:
     ser = False
     print("ser = false")
+    print(e)
 
 def get_data(type_):
     data = SerialIn.readline()
