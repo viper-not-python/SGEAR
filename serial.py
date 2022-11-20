@@ -1,12 +1,12 @@
 import serial
 
-try:
-    SerialIn = serial.Serial("/dev/ttyUSB0",9600)
-    ser = True
-    print("ser = true")
-except:
-    ser = False
-    print("ser = false")
+#try:
+#    SerialIn = serial.Serial("/dev/ttyUSB0",9600)
+#    ser = True
+#    print("ser = true")
+#except:
+#    ser = False
+#    print("ser = false")
 
 SerialIn = serial.Serial("/dev/ttyUSB0",9600)
 def get_data(type_):

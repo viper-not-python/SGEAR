@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 import datetime
 import math
-import pyaudio
-import struct
+#import pyaudio
+#import struct
 #import RPi.GPIO as GPIO
 #from scipy.fftpack import fft
 import time
