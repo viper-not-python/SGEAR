@@ -1,3 +1,4 @@
+import subprocess
 import cv2
 import numpy as np
 import datetime
@@ -6,8 +7,11 @@ import pyaudio
 import struct
 #import RPi.GPIO as GPIO
 #from scipy.fftpack import fft
-import serial
 import time
+
+#python setup
+subprocess.call("start python serial.py", shell=True)
+
 
 #video setup
 width = 1280
@@ -45,11 +49,7 @@ time_then = None
 a = datetime.datetime.now()
 time.sleep(0.001)
 
-try:
-    SerialIn = serial.Serial("/dev/ttyUSB0",9600)
-    ser = True
-except:
-    ser = False
+
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -88,26 +88,26 @@ def draw_line(x, y, direction, length, thickness, blue, green, red):
 
 def get_master_text():
     try:
-        with open ("master_text.txt", "r") as ms:
+        with open ("cmd/master_text.txt", "r") as ms:
             text = ms.read()
 
     except:
         print("permission denied 1")
 
     try:
-        with open ("master_text1.txt", "r") as ms1:
+        with open ("cmd/master_text1.txt", "r") as ms1:
             text1 = ms1.read()
     except:
         print("permission denied 2")
 
     try:
-        with open ("master_text2.txt", "r") as ms2:
+        with open ("cmd/master_text2.txt", "r") as ms2:
             text2 = ms2.read()
     except:
         print("permission denied 3")
 
     try:
-        with open ("master_text3.txt", "r") as ms3:
+        with open ("cmd/master_text3.txt", "r") as ms3:
             text3 = ms3.read()
     except:
         print("permission denied 4")
@@ -134,16 +134,6 @@ def sharpen(frame):
 
     return frame
 
-def get_data(type_):
-    data = SerialIn.readline()
-    data = data.decode()
-    
-    if type_ == "str":
-        return data
-    if type_ == "int":
-        data = int(data)
-        return data
-
 while True:
     ret, frame = stream.read()
     frame = cv2.resize(frame, (width, height))
@@ -157,6 +147,13 @@ while True:
     cv2.putText(frame, fps_str, (225,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
     
     a = datetime.datetime.now()
+
+    with open("serial/voltage.txt", "r") as v:
+        battery_status = v.read()
+    with open("serial/distance", "r") as d:
+        distance = d.read()
+    cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    cv2.putText(frame, distance, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
     cv2.circle(frame, (640, height + 1050), 1100, (0, 155, 0), 2)   #unten
     cv2.circle(frame, (640, -1050), 1100, (0, 155, 0), 2)   #oben
@@ -194,7 +191,7 @@ while True:
     #    except:
     #        pass
 
-    with open ("sharpen.txt", "r") as sharpen_:
+    with open ("cmd/sharpen.txt", "r") as sharpen_:
         sh = sharpen_.read()
         if sh == "sharpen":
             sharpen_img = False
@@ -208,30 +205,6 @@ while True:
     time_now = time_now[11:22]
     
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
-
-    if ser == True:
-        try:
-            voltage = get_data("str")[0:4]
-            voltage = voltage[0:2] + "." + voltage [2:4]
-            battery_status = voltage + " V"
-            cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #battery_voltage
-        except:
-            ser = False
-
-        try:
-            dta = get_data("str")
-            i1 = dta.find("u") + 1
-            i2 = dta.find("x")
-            distance_str = dta[i1:i2]
-            distance = int(distance_str)
-            distance_str = distance_str + "cm"
-            if distance == 0:
-                distance_str = "error"
-            cv2.putText(frame, distance_str, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #distance
-        except:
-            ser = False
-    else:
-        cv2.putText(frame, "SER = FALSE", (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
     get_master_text()   #text from hud_master.py
     
