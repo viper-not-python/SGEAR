@@ -3,8 +3,10 @@ import serial
 try:
     SerialIn = serial.Serial("/dev/ttyUSB0",9600)
     ser = True
+    print("ser = true")
 except:
     ser = False
+    print("ser = false")
 
 def get_data(type_):
     data = SerialIn.readline()
