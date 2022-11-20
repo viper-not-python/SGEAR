@@ -47,4 +47,4 @@ while True:
                 ser = False
     else:
         print("disconnected")
-        break()
+        break
