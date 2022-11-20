@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\cmd"
+    "\\cmd",
+    "\\serial"
   ],
   "SelectedNode": "\\hud.py",
   "PreviewInSolutionExplorer": false
