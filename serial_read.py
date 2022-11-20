@@ -51,4 +51,4 @@ while True:
             ser = True
         except:
             ser = False
-    time.sleep(0.5)
+    time.sleep(0.2)
