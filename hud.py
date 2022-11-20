@@ -21,15 +21,15 @@ view_pic = False
 
 init = True
 
-#audio setup
-CHUNK = 1024 * 2
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 44100
+##audio setup
+#CHUNK = 1024 * 2
+#FORMAT = pyaudio.paInt16
+#CHANNELS = 1
+#RATE = 44100
 
-p = pyaudio.PyAudio()
+#p = pyaudio.PyAudio()
 
-stream_aud = p.open(format = FORMAT, channels = CHANNELS, rate = RATE, input = True, output = True, frames_per_buffer = CHUNK)
+#stream_aud = p.open(format = FORMAT, channels = CHANNELS, rate = RATE, input = True, output = True, frames_per_buffer = CHUNK)
 
 #functions setup
 ch_amount = 128
@@ -67,26 +67,26 @@ def draw_line(x, y, direction, length, thickness, blue, green, red):
 
     cv2.line(frame, (x,y), (cos + x, sin + y), (blue, green, red), thickness)
 
-def soundmeter():
-    data = stream_aud.read(CHUNK, exception_on_overflow=False)
-    data_int = struct.unpack(str(2 * CHUNK) + 'B', data)
+#def soundmeter():
+#    data = stream_aud.read(CHUNK, exception_on_overflow=False)
+#    data_int = struct.unpack(str(2 * CHUNK) + 'B', data)
     
-    #y_fft = fft(data_int)
-    #y_fft = np.abs(y_fft[0:CHUNK])
-    #for i in range(0, len(y_fft)):
-    #    with open ("spectrum.log", "a") as sp:
-    #        out = str(f"{i}  :   {y_fft[i]}    ")
-    #        sp.write(out)640
-    #input()
+#    #y_fft = fft(data_int)
+#    #y_fft = np.abs(y_fft[0:CHUNK])
+#    #for i in range(0, len(y_fft)):
+#    #    with open ("spectrum.log", "a") as sp:
+#    #        out = str(f"{i}  :   {y_fft[i]}    ")
+#    #        sp.write(out)640
+#    #input()
 
-    if time_now != time_then:
-        for i in range(1, ch_amount+1):
-            avrg[i-1] = round(sum(data_int[(i-1) * ch_parts : i * ch_parts]) / ch_parts)
-            x = 128
-            y = 400
-            multiplier = 0.2
-            length = avrg[i-1] * multiplier
-            draw_line(x + i*3, y, 90, length, 1, 0, 255, 0)
+#    if time_now != time_then:
+#        for i in range(1, ch_amount+1):
+#            avrg[i-1] = round(sum(data_int[(i-1) * ch_parts : i * ch_parts]) / ch_parts)
+#            x = 128
+#            y = 400
+#            multiplier = 0.2
+#            length = avrg[i-1] * multiplier
+#            draw_line(x + i*3, y, 90, length, 1, 0, 255, 0)
 
 def get_master_text():
     try:
@@ -163,38 +163,38 @@ while True:
     cv2.circle(frame, (640, height + 1050), 1100, (0, 155, 0), 2)   #unten
     cv2.circle(frame, (640, -1050), 1100, (0, 155, 0), 2)   #oben
 
-    with open("sound.txt", "r") as sound:
-        s = sound.read()
-        if s == "sound":
-            soundmeter()
-        else:
-            pass
+    #with open("sound.txt", "r") as sound:
+    #    s = sound.read()
+    #    if s == "sound":
+    #        soundmeter()
+    #    else:
+    #        pass
 
     time_then = time_now
 
-    if view_pic == True:
-        try:
-            pic = cv2.imread("pic/pic.png")
-            pic = cv2.cvtColor(pic, cv2.COLOR_BGR2BGRA)
-            pic = cv2.resize(pic, (426, 240))
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
-            frame_h, frame_w, frame_c = frame.shape
+    #if view_pic == True:
+    #    try:
+    #        pic = cv2.imread("pic/pic.png")
+    #        pic = cv2.cvtColor(pic, cv2.COLOR_BGR2BGRA)
+    #        pic = cv2.resize(pic, (426, 240))
+    #        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
+    #        frame_h, frame_w, frame_c = frame.shape
     
-            overlay = np.zeros((frame_h, frame_w, 4), dtype='uint8')
-            pic_h, pic_w, pic_c = pic.shape
-            for i in range(0, pic_h):
-                for j in range(0, pic_w):
-                    if pic[i,j][3] != 0:
-                        offset = 10
-                        h_offset = frame_h - pic_h - offset
-                        w_offset = frame_w - pic_w - offset
-                        overlay[h_offset + i, w_offset+ j] = pic[i,j]
+    #        overlay = np.zeros((frame_h, frame_w, 4), dtype='uint8')
+    #        pic_h, pic_w, pic_c = pic.shape
+    #        for i in range(0, pic_h):
+    #            for j in range(0, pic_w):
+    #                if pic[i,j][3] != 0:
+    #                    offset = 10
+    #                    h_offset = frame_h - pic_h - offset
+    #                    w_offset = frame_w - pic_w - offset
+    #                    overlay[h_offset + i, w_offset+ j] = pic[i,j]
 
-            cv2.addWeighted(overlay, 1, frame, 0.25, 0, frame)
+    #        cv2.addWeighted(overlay, 1, frame, 0.25, 0, frame)
 
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
-        except:
-            pass
+    #        frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+    #    except:
+    #        pass
 
     with open ("sharpen.txt", "r") as sharpen_:
         sh = sharpen_.read()
@@ -237,12 +237,12 @@ while True:
 
     get_master_text()   #text from hud_master.py
     
-    with open ("status.txt", "r") as status:
-        stat = status.read()
-        if stat == "stream":
-            view_pic = False
-        if stat == "pic":
-            view_pic = True
+    #with open ("status.txt", "r") as status:
+    #    stat = status.read()
+    #    if stat == "stream":
+    #        view_pic = False
+    #    if stat == "pic":
+    #        view_pic = True
 
     cv2.imshow("", frame)
     
