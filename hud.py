@@ -10,7 +10,7 @@ import math
 import time
 
 #python setup
-subprocess.call("start python serial_read.py", shell=True)
+subprocess.call("python serial_read.py", shell=True)
 
 
 #video setup
