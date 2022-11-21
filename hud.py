@@ -15,7 +15,7 @@ import time
 width = 1280
 height = 660
 
-width = 600
+width = 580
 height = 420
 
 stream = cv2.VideoCapture(0)
