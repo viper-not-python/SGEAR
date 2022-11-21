@@ -217,8 +217,8 @@ while True:
 
     
 
-    frame = cv2.resize(frame, (540, 420))
-    cv2.imshow("l", frame)
+    frame = cv2.resize(frame, (520, 420))
+    cv2.imshow("", frame)
     
     if (cv2.waitKey(1)==ord("q")):
         break
