@@ -135,6 +135,8 @@ def sharpen(frame):
 
     return frame
 
+    
+
 while True:
     ret, frame = stream.read()
     frame = cv2.resize(frame, (width, height))
@@ -213,7 +215,12 @@ while True:
     #    if stat == "pic":
     #        view_pic = True
 
-    cv2.imshow("", frame)
+    
+
+    frame = cv2.resize(frame, (320, 210))
+    frame1 = cv2.resize(frame, (320, 210))
+    cv2.imshow("l", frame)
+    cv2.imshow("r", frame1)
     
     if (cv2.waitKey(1)==ord("q")):
         break
