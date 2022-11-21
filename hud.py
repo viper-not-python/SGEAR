@@ -19,8 +19,6 @@ width = 640
 height = 420
 
 stream = cv2.VideoCapture(0)
-stream.set(4, 1920)
-stream.set(3, 1080)
 
 fontsize = 1
 
