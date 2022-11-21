@@ -217,7 +217,7 @@ while True:
 
     
 
-    frame = cv2.resize(frame, (520, 390))
+    frame = cv2.resize(frame, (500, 390))
     cv2.imshow("", frame)
     
     if (cv2.waitKey(1)==ord("q")):
