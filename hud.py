@@ -219,11 +219,11 @@ while True:
     with open("serial/xyz.txt", "r") as xyz_:
         xyz = xyz_.read()
         c1 = xyz.find(",")
-        c2 = xyz[c1 + 2:].find(",") + 3
+        c2 = xyz[c1 + 2:].find(",") + 2
         #try:
         x = float(xyz[0:c1])
-        y = float(xyz[c1+2:c2])
-        z = float(xyz[c2 + 1:])
+        y = float(xyz[c1+1:c2])
+        z = float(xyz[c2:])
         draw_line(200, 200, y, 100, 1, 0, 255, 0)
         #except:
         #    pass
