@@ -222,6 +222,7 @@ while True:
         c2 = xyz[c1 + 1:].find(",")
         #try:
         x = float(xyz[0:c1])
+        print(xyz[c1 + 1:c2-1])
         y = float(xyz[c1 + 1:c2-1])
         z = float(xyz[c2 + 1:])
         draw_line(200, 200, y, 100, 1, 0, 255, 0)
