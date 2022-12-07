@@ -107,7 +107,7 @@ while True:
                 try_Y()     #acc
                 try_Z()     #acc
 
-                print(x)
+                xyz(x, y, z)
 
                 x_ = 1
                 y_ = 1
