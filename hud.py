@@ -222,11 +222,7 @@ while True:
         c2 = xyz[c1 + 2:].find(",") + 2
         #try:
         x = float(xyz[0:c1])
-        print(x)
-        print(c1)
-        print(c2)
-        print(xyz[c1 + 1:c2])
-        y = xyz[c1 + 1:c2]
+        y = xyz[c1:c2]
         print(y)
         input()
         z = float(xyz[c2 + 1:])
