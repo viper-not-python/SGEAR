@@ -98,9 +98,11 @@ while True:
                 try_x()            
                 try_y()            
                 try_z()            
-                try_X()            
-                try_Y()
-                try_Z()
+                try_X()     #acc            
+                try_Y()     #acc
+                try_Z()     #acc
+
+                print(x)
 
                 x_ = 1
                 y_ = 1
