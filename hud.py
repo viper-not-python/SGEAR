@@ -222,6 +222,9 @@ while True:
         c2 = xyz[c1 + 2:].find(",")
         #try:
         x = float(xyz[0:c1])
+        print(x)
+        print(c1)
+        print(c2)
         print(xyz[c1 + 1:c2])
         input()
         y = float(xyz[c1 + 1:c2-1])
