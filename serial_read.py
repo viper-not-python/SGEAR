@@ -2,6 +2,9 @@ import serial
 import time
 import math
 
+
+tries = 0
+
 try:
     SerialIn = serial.Serial("/dev/ttyUSB0",9600)
     ser = True
@@ -87,8 +90,6 @@ def xyo(x, y, o):
         xyo_ = f"{x},{y},{o}"
         xyo.write(xyo_)
 
-time.sleep(5)
-
 while True:
     if ser == True:
             try:
@@ -111,5 +112,10 @@ while True:
 
 
     else:
-        print("disconnected")
-        break
+        tries = tries + 1
+        if tries == 11:
+            print("disconnected")
+            break
+        print(f"trying again {tries} / 10")
+        ser = True
+        
