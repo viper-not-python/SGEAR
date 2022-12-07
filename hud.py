@@ -222,7 +222,11 @@ while True:
         c2 = xyz[c1 + 1:].find(",") + c1
         #x = float(xyz[0:c1])
         #y = float(xyz[c1+1:c2+1])
-        z = float(xyz[c2+2:])
+        z = xyz[c2+2:]
+        try:
+            z = float(z)
+        except:
+            pass
         z_ = z * -1
         z = z_+ 180
         draw_line(320, 220, z_, 200, 1, 0, 255, 0)
