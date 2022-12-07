@@ -223,6 +223,7 @@ while True:
         x = float(xyz[0:c1])
         y = float(xyz[c1+1:c2+1])
         z = float(xyz[c2+2:])
+        z = z * -1
         draw_line(200, 200, z, 100, 1, 0, 255, 0)
 
     #with open ("status.txt", "r") as status:
