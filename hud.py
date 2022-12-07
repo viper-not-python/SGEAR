@@ -216,21 +216,13 @@ while True:
     
     get_master_text()   #text from hud_master.py
     
-    with open("serial/xyz.txt", "r") as xyz_:
-        xyz = xyz_.read()
-        c1 = xyz.find(",")
-        c2 = xyz[c1 + 1:].find(",") + c1
-        #x = float(xyz[0:c1])
-        #y = float(xyz[c1+1:c2+1])
-        z = xyz[c2+2:]
-        try:
-            z = float(z)
-            z_ = z * -1
-            z = z_+ 180
-            draw_line(320, 220, z_, 200, 1, 0, 255, 0)
-            draw_line(320, 220, z, 200, 1, 0, 255, 0)
-        except:
-            pass        
+    with open("serial/z.txt", "r") as z__:
+        z = z__.read()
+        z = float(z)
+        z_ = z * -1
+        z = z_+ 180
+        draw_line(320, 220, z_, 200, 1, 0, 255, 0)
+        draw_line(320, 220, z, 200, 1, 0, 255, 0)      
 
     #with open ("status.txt", "r") as status:
     #    stat = status.read()

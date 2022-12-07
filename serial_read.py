@@ -86,9 +86,8 @@ def try_Z():
     Z = dta[i1:i2]
 
 def xyz(x, y, z):
-    with open("serial/xyz.txt", "w") as xyz:    #xyz
-        xyz_ = f"{x},{y},{z}"
-        xyz.write(xyz_)
+    with open("serial/z.txt", "w") as z__:    #z
+        z__.write(z)
 
 def xyo(x, y, o):
     with open("matrix/xyo.txt", "w") as xyo:    #xyo
