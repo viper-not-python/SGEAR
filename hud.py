@@ -216,6 +216,12 @@ while True:
     
     get_master_text()   #text from hud_master.py
     
+    with open("serial/xyz.txt") as xyz_:
+        xyz = xyz_.read()
+        ix = xyz.find(",")
+        x = xyz[0:ix]
+        draw_line(200, 200, x, 100, 1, 0, 255, 0)
+
     #with open ("status.txt", "r") as status:
     #    stat = status.read()
     #    if stat == "stream":
