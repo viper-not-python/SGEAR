@@ -219,7 +219,7 @@ while True:
     with open("serial/xyz.txt", "r") as xyz_:
         xyz = xyz_.read()
         ix = xyz.find(",")
-        x = int(xyz[0:ix])
+        x = float(xyz[0:ix])
         draw_line(200, 200, x, 100, 1, 0, 255, 0)
 
     #with open ("status.txt", "r") as status:
