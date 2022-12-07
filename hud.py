@@ -219,8 +219,11 @@ while True:
     with open("serial/xyz.txt", "r") as xyz_:
         xyz = xyz_.read()
         ix = xyz.find(",")
-        x = float(xyz[0:ix])
-        draw_line(200, 200, x, 100, 1, 0, 255, 0)
+        try:
+            x = float(xyz[0:ix])
+            draw_line(200, 200, x, 100, 1, 0, 255, 0)
+        except:
+            pass
 
     #with open ("status.txt", "r") as status:
     #    stat = status.read()
