@@ -225,12 +225,12 @@ while True:
         z = xyz[c2+2:]
         try:
             z = float(z)
+            z_ = z * -1
+            z = z_+ 180
+            draw_line(320, 220, z_, 200, 1, 0, 255, 0)
+            draw_line(320, 220, z, 200, 1, 0, 255, 0)
         except:
-            pass
-        z_ = z * -1
-        z = z_+ 180
-        draw_line(320, 220, z_, 200, 1, 0, 255, 0)
-        draw_line(320, 220, z, 200, 1, 0, 255, 0)
+            pass        
 
     #with open ("status.txt", "r") as status:
     #    stat = status.read()
