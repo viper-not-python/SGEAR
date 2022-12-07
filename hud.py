@@ -216,7 +216,7 @@ while True:
     
     get_master_text()   #text from hud_master.py
     
-    with open("serial/xyz.txt") as xyz_:
+    with open("serial/xyz.txt", "r") as xyz_:
         xyz = xyz_.read()
         ix = xyz.find(",")
         x = xyz[0:ix]
