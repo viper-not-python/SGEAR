@@ -220,13 +220,13 @@ while True:
         xyz = xyz_.read()
         c1 = xyz.find(",")
         c2 = xyz[c1 + 1:].find(",")
-        try:
-            x = float(xyz[0:c1])
-            y = float(xyz[c1 + 1:c2])
-            z = float(xyz[c2 + 1:])
-            draw_line(200, 200, y, 100, 1, 0, 255, 0)
-        except:
-            pass
+        #try:
+        x = float(xyz[0:c1])
+        y = float(xyz[c1 + 1:c2])
+        z = float(xyz[c2 + 1:])
+        draw_line(200, 200, y, 100, 1, 0, 255, 0)
+        #except:
+        #    pass
 
     #with open ("status.txt", "r") as status:
     #    stat = status.read()
