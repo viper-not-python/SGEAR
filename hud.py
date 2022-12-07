@@ -135,28 +135,20 @@ def sharpen(frame):
 
     return frame
 
+def get_distance():
+    with open("serial/distance.txt", "r") as d:
+        dist = d.read()
+    return dist
+
+def get_battery():
+    with open("serial/voltage.txt", "r") as v:
+        bat_stat = v.read()
+    return bat_stat
     
 
 while True:
     ret, frame = stream.read()
     frame = cv2.resize(frame, (width, height))
-
-    b = datetime.datetime.now()
-    delta = b - a
-    delta = float(delta.total_seconds())
-
-    fps = int(1 / delta)
-    fps_str = str(fps) + "fps"
-    cv2.putText(frame, fps_str, (225,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
-    
-    a = datetime.datetime.now()
-
-    with open("serial/voltage.txt", "r") as v:
-        battery_status = v.read()
-    with open("serial/distance.txt", "r") as d:
-        distance = d.read()
-    cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
-    cv2.putText(frame, distance, (600,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
     #with open("sound.txt", "r") as sound:
     #    s = sound.read()
@@ -206,6 +198,22 @@ while True:
     
     cv2.putText(frame, time_now, (0, 24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
 
+    b = datetime.datetime.now()
+    delta = b - a
+    delta = float(delta.total_seconds())
+
+    fps = int(1 / delta)
+    fps_str = str(fps) + "fps"
+    cv2.putText(frame, fps_str, (225,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    
+    a = datetime.datetime.now()
+
+    battery_status = get_battery()
+    distance = get_distance()
+    cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    cv2.putText(frame, distance, (350,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+
+    
     get_master_text()   #text from hud_master.py
     
     #with open ("status.txt", "r") as status:
