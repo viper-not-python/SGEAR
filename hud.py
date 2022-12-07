@@ -222,10 +222,12 @@ while True:
         c2 = xyz[c1 + 2:].find(",") + 3
         #try:
         x = float(xyz[0:c1])
-        y = xyz[c1+2:c2]
+        y = float(xyz[c1+2:c2])
         print(y)
         input()
         z = float(xyz[c2 + 1:])
+        print(z)
+        input()
         draw_line(200, 200, y, 100, 1, 0, 255, 0)
         #except:
         #    pass
