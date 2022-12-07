@@ -221,10 +221,13 @@ while True:
         c1 = xyz.find(",")
         c2 = xyz[c1 + 2:].find(",") + 2
         #try:
-        x = float(xyz[0:c1])
-        y = float(xyz[c1+1:c2])
-        z = float(xyz[c2:])
-        draw_line(200, 200, y, 100, 1, 0, 255, 0)
+        x = xyz[0:c1]
+        y = xyz[c1+1:c2]
+        z = xyz[c2:]
+        print(x)
+        print(y)
+        print(z)
+        #draw_line(200, 200, y, 100, 1, 0, 255, 0)
         #except:
         #    pass
 
