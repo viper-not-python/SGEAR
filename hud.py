@@ -226,8 +226,9 @@ while True:
         print(c1)
         print(c2)
         print(xyz[c1 + 1:c2])
+        y = xyz[c1 + 1:c2]
+        print(y)
         input()
-        y = float(xyz[c1 + 1:c2])
         z = float(xyz[c2 + 1:])
         draw_line(200, 200, y, 100, 1, 0, 255, 0)
         #except:
