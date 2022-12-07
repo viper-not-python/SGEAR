@@ -219,7 +219,7 @@ while True:
     with open("serial/xyz.txt", "r") as xyz_:
         xyz = xyz_.read()
         c1 = xyz.find(",")
-        c2 = xyz[c1 + 1:].find(",")
+        c2 = xyz[c1 + 2:].find(",")
         #try:
         x = float(xyz[0:c1])
         print(xyz[c1 + 1:c2-1])
