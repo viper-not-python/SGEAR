@@ -224,8 +224,8 @@ while True:
             z = z_+ 180
             draw_line(320, 220, z_, 200, 1, 0, 255, 0)
             draw_line(320, 220, z, 200, 1, 0, 255, 0)   
-        except Exception as e:
-            print(e)
+        except:
+            pass
 
     #with open ("status.txt", "r") as status:
     #    stat = status.read()
