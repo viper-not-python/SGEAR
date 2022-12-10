@@ -15,11 +15,8 @@ import time
 width = 1280
 height = 660
 
-width = 2000
+width = 1184
 height = 624
-
-height = int(height * 0.875)
-width = int(width * 0.875)
 
 stream = cv2.VideoCapture(0)
 
@@ -151,7 +148,7 @@ def get_battery():
 
 while True:
     ret, frame = stream.read()
-    frame = cv2.resize(frame, (width, height))
+    frame = cv2.resize(frame, (640, 420))
 
     #with open("sound.txt", "r") as sound:
     #    s = sound.read()
@@ -239,7 +236,7 @@ while True:
 
     
 
-    frame = cv2.resize(frame, (510, 382))
+    frame = cv2.resize(frame, (width, height))
     cv2.imshow("", frame)
     
     if (cv2.waitKey(1)==ord("q")):
