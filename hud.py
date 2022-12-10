@@ -15,7 +15,7 @@ import time
 width = 1280
 height = 660
 
-width = 1184
+width = 2000
 height = 624
 
 height = int(height * 0.875)
