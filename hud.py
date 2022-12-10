@@ -18,8 +18,8 @@ height = 660
 width = 1184
 height = 624
 
-height = height * 0.875
-width = width * 0.875
+height = int(height * 0.875)
+width = int(width * 0.875)
 
 stream = cv2.VideoCapture(0)
 
