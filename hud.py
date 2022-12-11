@@ -239,7 +239,7 @@ while True:
     cv2.imshow("2", frame)
     if moved == False:
         cv2.moveWindow("1", -240, 500)
-        cv2.moveWindow("2", 1280-240, 500)
+        cv2.moveWindow("2", 1280*2-240, 500)
         moved = True
     else:
         pass
