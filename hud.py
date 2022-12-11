@@ -12,9 +12,6 @@ import time
 #subprocess.run("python serial_read.py", shell=True)
 
 #video setup
-width = 1280
-height = 660
-
 width = 947
 height = 546
 
@@ -237,7 +234,8 @@ while True:
     
 
     frame = cv2.resize(frame, (width, height))
-    cv2.imshow("", frame)
+    cv2.imshow("1", frame)
+    cv2.imshow("2", frame)
     
     if (cv2.waitKey(1)==ord("q")):
         break
