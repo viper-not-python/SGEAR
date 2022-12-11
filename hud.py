@@ -47,6 +47,7 @@ time_then = None
 a = datetime.datetime.now()
 time.sleep(0.001)
 
+moved = False
 
 
 #methods
@@ -236,6 +237,12 @@ while True:
     frame = cv2.resize(frame, (width, height))
     cv2.imshow("1", frame)
     cv2.imshow("2", frame)
+    if moved == False:
+        cv2.moveWindow("1", -240, 500)
+        cv2.moveWindow("2", 1280-240, 500)
+        moved = True
+    else:
+        pass
     
     if (cv2.waitKey(1)==ord("q")):
         break
