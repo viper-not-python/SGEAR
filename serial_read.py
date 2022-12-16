@@ -43,20 +43,10 @@ def try_distance():
 
 
 while True:
-    if ser == True:
-            try:
-                try_voltage()            
-                try_distance()                        
-            except:
-                ser = False
-
-
-    else:
-        tries = tries + 1
-        if tries == 11:
-            print("disconnected")
-            break
-        print(f"trying again {tries} / 10")
-        ser = True
+    try:
+        try_voltage()            
+        try_distance()
+    except:
+        pass
     time.sleep(0.01)
         
