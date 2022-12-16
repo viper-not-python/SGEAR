@@ -144,16 +144,17 @@ def get_battery():
     return bat_stat
 
 def mpu():
-    with open("serial/z.txt", "r") as z__:
-        z = z__.read()
-        try:
-            z = float(z)
-            z_ = z * -1
-            z = z_+ 180
-            draw_line(320, 220, z_, 200, 1, 0, 255, 0)
-            draw_line(320, 220, z, 200, 1, 0, 255, 0)   
-        except:
-            pass
+    #with open("serial/z.txt", "r") as z__:
+    #    z = z__.read()
+    #    try:
+    #        z = float(z)
+    #        z_ = z * -1
+    #        z = z_+ 180
+    #        draw_line(320, 220, z_, 200, 1, 0, 255, 0)
+    #        draw_line(320, 220, z, 200, 1, 0, 255, 0)   
+    #    except:
+    #        pass
+    pass
     
 
 while True:
