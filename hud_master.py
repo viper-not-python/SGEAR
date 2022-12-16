@@ -26,12 +26,12 @@ while True:
             with open ("cmd/master_text3.txt", "w") as ms3:
                 ms3.write(x[5: ])
 
-    #if x == "stream":
-    #    with open ("status.txt", "w") as status:
-    #        status.write(x)
-    #if x == "pic":
-    #    with open ("status.txt", "w") as status:
-    #        status.write(x)
+    if x == "nopic":
+        with open ("cmd/status.txt", "w") as status:
+            status.write(x)
+    if x == "pic":
+        with open ("cmd/status.txt", "w") as status:
+            status.write(x)
     #if x == "sound":
     #    with open ("sound.txt", "w") as sound:
     #        sound.write(x)

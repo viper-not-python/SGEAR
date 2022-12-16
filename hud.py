@@ -49,6 +49,7 @@ time.sleep(0.001)
 
 moved = False
 
+pic = False
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -159,6 +160,17 @@ def mpu():
 
 while True:
     ret, frame = stream.read()
+    with open ("cmd/status.txt", "r") as status:
+        p_status = status.read()
+        if p_status == "nopic":
+            pic = False
+        if p_status == "pic":
+            pic = True
+
+    if pic == True:
+        frame = cv2.imread("pic/pic.jpg")
+    else:
+        pass
     frame = cv2.resize(frame, (640, 420))
 
     #with open("sound.txt", "r") as sound:

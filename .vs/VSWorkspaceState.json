@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\matrix",
-    "\\serial"
+    "\\serial",
+    "\\tests"
   ],
-  "SelectedNode": "\\hud.py",
+  "SelectedNode": "\\serial_read.py",
   "PreviewInSolutionExplorer": false
 }
