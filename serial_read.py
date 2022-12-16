@@ -1,4 +1,5 @@
 import serial
+import time
 
 tries = 0
 
@@ -57,4 +58,5 @@ while True:
             break
         print(f"trying again {tries} / 10")
         ser = True
+    time.sleep(0.01)
         
