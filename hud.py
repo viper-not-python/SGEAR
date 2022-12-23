@@ -11,7 +11,7 @@ import os
 
 #python setup
 #subprocess.run("python serial_read.py", shell=True)
-os.system("python serial_read.py &")
+#os.system("python serial_read.py &")
 
 #video setup
 width = 947
