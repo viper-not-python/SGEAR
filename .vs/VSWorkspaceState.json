@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\cmd",
+    "\\pic",
     "\\serial",
     "\\tests"
   ],
-  "SelectedNode": "\\serial_read.py",
+  "SelectedNode": "\\hud.py",
   "PreviewInSolutionExplorer": false
 }

@@ -32,6 +32,15 @@ while True:
     if x == "pic":
         with open ("cmd/status.txt", "w") as status:
             status.write(x)
+    if x == "pic1":
+        with open ("cmd/status.txt", "w") as status:
+            status.write(x)
+    if x == "pic2":
+        with open ("cmd/status.txt", "w") as status:
+            status.write(x)
+    if x == "pic3":
+        with open ("cmd/status.txt", "w") as status:
+            status.write(x)
     #if x == "sound":
     #    with open ("sound.txt", "w") as sound:
     #        sound.write(x)

@@ -4,7 +4,7 @@ import datetime
 import math
 #import pyaudio
 #import struct
-#import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO 
 #from scipy.fftpack import fft
 import time
 
@@ -164,11 +164,14 @@ while True:
         p_status = status.read()
         if p_status == "nopic":
             pic = False
-        if p_status == "pic":
+        else:
             pic = True
 
     if pic == True:
-        frame = cv2.imread("pic/pic.jpg")
+        try:
+            frame = cv2.imread(f"/pics/{p_status}.jpg")
+        except:
+            pass
     else:
         pass
     frame = cv2.resize(frame, (640, 420))
