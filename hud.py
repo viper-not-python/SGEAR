@@ -129,8 +129,11 @@ def get_master_text():
     cv2.putText(frame, text3, (465, 405), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
 
 def sharpen(frame):
-    sharpen_filter = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])    
-    frame = cv2.filter2D(frame, ddepth=-1, kernel=sharpen_filter)
+    try:
+        sharpen_filter = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])    
+        frame = cv2.filter2D(frame, ddepth=-1, kernel=sharpen_filter)
+    except:
+        pass
 
     return frame
 
