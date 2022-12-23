@@ -169,12 +169,12 @@ while True:
 
     if pic == True:
         try:
-            frame = cv2.imread(f"/pics/{p_status}.jpg")
+            frame = cv2.imread(f"/pics/{p_status}.jpg")     #create folder "/pics/" and chmod 777, also samba ==> https://www.youtube.com/watch?v=z2W2jfzIhTI
+            frame = cv2.resize(frame, (640, 420))
         except:
-            pass
+            frame = cv2.resize(frame, (640, 420))
     else:
-        pass
-    frame = cv2.resize(frame, (640, 420))
+        frame = cv2.resize(frame, (640, 420))
 
     #with open("sound.txt", "r") as sound:
     #    s = sound.read()
