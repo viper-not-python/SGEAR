@@ -7,9 +7,11 @@ import math
 #import RPi.GPIO as GPIO 
 #from scipy.fftpack import fft
 import time
+import os
 
 #python setup
 #subprocess.run("python serial_read.py", shell=True)
+os.system("python serial_read.py &")
 
 #video setup
 width = 947
