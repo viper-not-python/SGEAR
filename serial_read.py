@@ -1,5 +1,11 @@
 import serial
 import time
+import cv2
+
+frame = cv2.imread("pic/serial.jpg")
+frame = cv2.resize(frame, (10, 10))
+cv2.imshow("serial", frame)
+cv2.moveWindow("serial", 0, 0)
 
 tries = 0
 
