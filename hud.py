@@ -173,13 +173,12 @@ while True:
     if pic == True:
         try:
             frame = cv2.imread(f"/pics/{p_status}.jpg")     #create folder "/pics/" and chmod 777, also samba ==> https://www.youtube.com/watch?v=z2W2jfzIhTI
-            frame_old = cv2.imread(f"/pics/{p_status}.jpg")
             try:
                 frame = cv2.resize(frame, (640, 420))
             except:
-                pass
+                ret, frame = stream.read()
         except:
-            frame = cv2.resize(frame_old, (640, 420))
+            ret, frame = stream.read()
     else:
         frame = cv2.resize(frame, (640, 420))
 
