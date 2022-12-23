@@ -10,6 +10,7 @@ import time
 
 #python setup
 #subprocess.run("python serial_read.py", shell=True)
+os.system("serial_read.py")
 
 #video setup
 width = 947
