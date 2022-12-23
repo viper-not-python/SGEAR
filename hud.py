@@ -277,3 +277,4 @@ while True:
 stream.release()
 cv2.destroyAllWindows()
 #GPIO.cleanup()
+os.system("pkill python")
