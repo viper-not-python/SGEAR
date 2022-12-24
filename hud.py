@@ -11,7 +11,7 @@ import os
 import socket
 import pickle
 import imutils
-import multiprocessing as mp
+from threading import Thread
 
 #python setup
 
@@ -33,7 +33,7 @@ fontsize = 1
 # Socket Create
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 host_name  = socket.gethostname()
-host_ip = '192.168.170.208'
+host_ip = '192.168.170.36'
 
 port = 9999
 socket_address = (host_ip,port)
@@ -191,10 +191,9 @@ def mpu():
     #    except:
     #        pass
     pass
-    
-def connect(smth):
+   
+def connect():
     global client_socket, addr, connected, trying_to_connect
-    print("connecting")
     client_socket,addr = server_socket.accept()
     connected = True
     trying_to_connect = False
@@ -203,10 +202,7 @@ def try_connection():
     global trying_to_connect
     if trying_to_connect == False:
         trying_to_connect = True
-        #p1 = mp.Process(target=connect, args=(0,))
-        #p1.start()
-        connect(0)
-        print("connected")
+        Thread(target=connect).start()
     else:
         pass
 
