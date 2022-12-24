@@ -199,8 +199,8 @@ def connect():
     trying_to_connect = False
 
 def try_connection():
+    global trying_to_connect
     if trying_to_connect == False:
-        global trying_to_connect
         trying_to_connect = True
         p1 = mp.Process(target=connect)
         p1.start()
