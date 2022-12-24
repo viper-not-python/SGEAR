@@ -32,7 +32,7 @@ fontsize = 1
 # Socket Create
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 host_name  = socket.gethostname()
-host_ip = socket.gethostbyname(host_name)
+host_ip = '192.168.170.208'
 
 port = 9999
 socket_address = (host_ip,port)
