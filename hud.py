@@ -194,6 +194,7 @@ def mpu():
     
 def connect(smth):
     global client_socket, addr, connected, trying_to_connect
+    print("connecting")
     client_socket,addr = server_socket.accept()
     connected = True
     trying_to_connect = False
