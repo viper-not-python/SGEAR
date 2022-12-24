@@ -47,6 +47,7 @@ server_socket.listen(5)
 # Socket Accept
 client_socket,addr = server_socket.accept()
 connected = True
+global trying_to_connect
 trying_to_connect = False
 
 ##audio setup
