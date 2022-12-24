@@ -11,6 +11,7 @@ import os
 import socket
 import pickle
 import imutils
+import multiprocessing as mp
 
 #python setup
 
@@ -46,6 +47,7 @@ server_socket.listen(5)
 # Socket Accept
 client_socket,addr = server_socket.accept()
 connected = True
+trying_to_connect = False
 
 ##audio setup
 
@@ -77,6 +79,8 @@ time.sleep(0.001)
 moved = False
 
 pic = False
+
+c_s = 0
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -187,6 +191,20 @@ def mpu():
     #        pass
     pass
     
+def connect():
+    global client_socket, addr, connected, trying_to_connect
+    client_socket,addr = server_socket.accept()
+    connected = True
+    trying_to_connect = False
+
+def try_connection():
+    if trying_to_connect == False:
+        global trying_to_connect
+        trying_to_connect = True
+        p1 = mp.Process(target=connect)
+        p1.start()
+    else:
+        pass
 
 while True:
     ret, frame = stream.read()
@@ -272,8 +290,7 @@ while True:
         except:
             connected = False
     else:
-        client_socket,addr = server_socket.accept()
-        connected = True
+        try_connection()
 
     if (cv2.waitKey(1)==ord("q")):
         break
