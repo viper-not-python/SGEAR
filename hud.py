@@ -203,8 +203,10 @@ def try_connection():
     global trying_to_connect
     if trying_to_connect == False:
         trying_to_connect = True
-        p1 = mp.Process(target=connect, args=("stuff",))
-        p1.start()
+        #p1 = mp.Process(target=connect, args=(0,))
+        #p1.start()
+        connect(0)
+        print("connected")
     else:
         pass
 
