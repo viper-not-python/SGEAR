@@ -37,8 +37,6 @@ host_ip = '192.168.170.208'
 port = 9999
 socket_address = (host_ip,port)
 
-print(host_name, host_ip, socket_address)
-
 # Socket Bind
 server_socket.bind(socket_address)
 
@@ -265,7 +263,7 @@ while True:
     else:
         pass
     
-    frame = imutils.resize(frame,width=680)
+    frame = imutils.resize(frame,width=150)
     var_a = pickle.dumps(frame)
     message = struct.pack("Q",len(var_a))+var_a
     if connected == True:
