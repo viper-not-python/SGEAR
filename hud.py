@@ -3,13 +3,17 @@ import numpy as np
 import datetime
 import math
 #import pyaudio
-#import struct
+import struct
 #import RPi.GPIO as GPIO 
 #from scipy.fftpack import fft
 import time
 import os
+import socket
+import pickle
+import imutils
 
 #python setup
+
 #subprocess.run("python serial_read.py", shell=True)
 #os.system("python serial_read.py &")
 
@@ -23,7 +27,27 @@ fontsize = 1
 
 #view_pic = False
 
+#socket setup
+
+# Socket Create
+server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+host_name  = socket.gethostname()
+host_ip = socket.gethostbyname(host_name)
+port = 9999
+socket_address = (host_ip,port)
+
+# Socket Bind
+server_socket.bind(socket_address)
+
+# Socket Listen
+server_socket.listen(5)
+
+# Socket Accept
+client_socket,addr = server_socket.accept()
+connected = True
+
 ##audio setup
+
 #CHUNK = 1024 * 2
 #FORMAT = pyaudio.paInt16
 #CHANNELS = 1
@@ -193,30 +217,6 @@ while True:
 
     time_then = time_now
 
-    #if view_pic == True:
-    #    try:
-    #        pic = cv2.imread("pic/pic.png")
-    #        pic = cv2.cvtColor(pic, cv2.COLOR_BGR2BGRA)
-    #        pic = cv2.resize(pic, (426, 240))
-    #        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
-    #        frame_h, frame_w, frame_c = frame.shape
-    
-    #        overlay = np.zeros((frame_h, frame_w, 4), dtype='uint8')
-    #        pic_h, pic_w, pic_c = pic.shape
-    #        for i in range(0, pic_h):
-    #            for j in range(0, pic_w):
-    #                if pic[i,j][3] != 0:
-    #                    offset = 10
-    #                    h_offset = frame_h - pic_h - offset
-    #                    w_offset = frame_w - pic_w - offset
-    #                    overlay[h_offset + i, w_offset+ j] = pic[i,j]
-
-    #        cv2.addWeighted(overlay, 1, frame, 0.25, 0, frame)
-
-    #        frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
-    #    except:
-    #        pass
-
     with open ("cmd/sharpen.txt", "r") as sharpen_:
         sh = sharpen_.read()
         if sh == "sharpen":
@@ -250,16 +250,7 @@ while True:
     
     get_master_text()   #text from hud_master.py
     
-    mpu()
-
-    #with open ("status.txt", "r") as status:
-    #    stat = status.read()
-    #    if stat == "stream":
-    #        view_pic = False
-    #    if stat == "pic":
-    #        view_pic = True
-
-    
+    mpu()    
 
     frame = cv2.resize(frame, (width, height))
     cv2.imshow("1", frame)
@@ -271,9 +262,22 @@ while True:
     else:
         pass
     
+    frame = imutils.resize(frame,width=680)
+    var_a = pickle.dumps(frame)
+    message = struct.pack("Q",len(var_a))+var_a
+    if connected == True:
+        try:
+            client_socket.sendall(message)
+        except:
+            connected = False
+    else:
+        client_socket,addr = server_socket.accept()
+        connected = True
+
     if (cv2.waitKey(1)==ord("q")):
         break
 
 stream.release()
 cv2.destroyAllWindows()
+client_socket.close()
 #GPIO.cleanup()
