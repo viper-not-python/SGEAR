@@ -33,7 +33,7 @@ fontsize = 1
 # Socket Create
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 host_name  = socket.gethostname()
-host_ip = '192.168.170.36'
+host_ip = '192.168.170.208'
 
 port = 9999
 socket_address = (host_ip,port)
@@ -45,8 +45,7 @@ server_socket.bind(socket_address)
 server_socket.listen(5)
 
 # Socket Accept
-client_socket,addr = server_socket.accept()
-connected = True
+connected = False
 global trying_to_connect
 trying_to_connect = False
 

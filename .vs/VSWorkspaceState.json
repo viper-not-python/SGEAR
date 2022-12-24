@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\pic"
+    "\\pic",
+    "\\tests"
   ],
-  "SelectedNode": "\\read.py",
+  "SelectedNode": "\\hud.py",
   "PreviewInSolutionExplorer": false
 }
