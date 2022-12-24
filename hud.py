@@ -192,7 +192,7 @@ def mpu():
     #        pass
     pass
     
-def connect():
+def connect(smth):
     global client_socket, addr, connected, trying_to_connect
     client_socket,addr = server_socket.accept()
     connected = True
@@ -202,7 +202,7 @@ def try_connection():
     global trying_to_connect
     if trying_to_connect == False:
         trying_to_connect = True
-        p1 = mp.Process(target=connect)
+        p1 = mp.Process(target=connect, args=("stuff",))
         p1.start()
     else:
         pass
