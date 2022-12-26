@@ -242,6 +242,7 @@ def check_internet():
 def fps_c(fps, o):
     fps_change = abs(fps - 10)
     fps_change = int(0.5 * math.pow(fps_change, 2))
+    fps_change = 2
     print(fps_change, o)
     return fps_change
 
@@ -256,7 +257,7 @@ def send():
         send_delta = float(send_delta.total_seconds())
         if send_delta != 0:
             send_fps = int(1 / send_delta)
-            if send_fps < 30:
+            if send_fps < 50:
                 if send_fps > 10:
                     w_custom = w_custom + fps_c(send_fps, ">")
                 if send_fps < 10:
