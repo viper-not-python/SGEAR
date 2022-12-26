@@ -12,6 +12,7 @@ import socket
 import pickle
 import imutils
 from threading import Thread
+import requests
 
 #python setup
 
@@ -27,27 +28,6 @@ stream = cv2.VideoCapture(0)
 fontsize = 1
 
 #view_pic = False
-
-#socket setup
-
-# Socket Create
-server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-host_name  = socket.gethostname()
-host_ip = '192.168.170.208'
-
-port = 9999
-socket_address = (host_ip,port)
-
-# Socket Bind
-server_socket.bind(socket_address)
-
-# Socket Listen
-server_socket.listen(5)
-
-# Socket Accept
-connected = False
-global trying_to_connect
-trying_to_connect = False
 
 ##audio setup
 
@@ -81,6 +61,10 @@ moved = False
 pic = False
 
 c_s = 0
+
+socket_initialized = False
+internet = False
+checking_internet = False
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -205,6 +189,47 @@ def try_connection():
     else:
         pass
 
+def socket_initialize():
+    global socket_initialized, trying_to_connect, connected, host_name, host_ip, socket_address, port, server_socket
+    # Socket Create
+    server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    host_name  = socket.gethostname()
+    host_ip = '192.168.170.208'
+
+    port = 9999
+    socket_address = (host_ip,port)
+
+    # Socket Bind
+    server_socket.bind(socket_address)
+
+    # Socket Listen
+    server_socket.listen(5)
+
+    connected = False
+    trying_to_connect = False
+    socket_initialized = True
+
+def is_inet_active(timeout):
+    try:
+        requests.head("https://google.com", timeout=timeout)
+        return True
+    except requests.ConnectionError:
+        return False
+
+
+def int_ping():
+    global checking_internet, internet
+
+    if is_inet_active(1) == True:
+        internet = True
+    checking_internet = False
+
+def check_internet():
+    global checking_internet
+    if checking_internet == False:
+        checking_internet == True
+        Thread(target=int_ping).start()
+
 while True:
     ret, frame = stream.read()
     with open ("cmd/status.txt", "r") as status:
@@ -280,21 +305,29 @@ while True:
     else:
         pass
     
-    frame = imutils.resize(frame,width=150)
-    var_a = pickle.dumps(frame)
-    message = struct.pack("Q",len(var_a))+var_a
-    if connected == True:
-        try:
-            client_socket.sendall(message)
-        except:
-            connected = False
-    else:
-        try_connection()
+    if internet == False:
+        check_internet()
+
+    if internet == True and socket_initialized == False:
+        socket_initialize()
+        socket_initialized = True
+
+    if socket_initialized == True:
+        frame = imutils.resize(frame,width=150)
+        var_a = pickle.dumps(frame)
+        message = struct.pack("Q",len(var_a))+var_a
+        if connected == True:
+            try:
+                client_socket.sendall(message)
+            except:
+                connected = False
+        else:
+            try_connection()
 
     if (cv2.waitKey(1)==ord("q")):
         break
 
 stream.release()
 cv2.destroyAllWindows()
-client_socket.close()
+#client_socket.close()
 #GPIO.cleanup()
