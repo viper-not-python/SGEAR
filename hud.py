@@ -263,9 +263,7 @@ def send():
                 if send_fps < 15:
                     w_custom = w_custom - 2    
             if w_custom == 500:
-                print("reached")
                 w_custom = w_custom - 2
-            print(w_custom, send_fps)
         else:
             pass
         
