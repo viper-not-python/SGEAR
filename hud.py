@@ -257,13 +257,11 @@ def send():
         send_delta = float(send_delta.total_seconds())
         if send_delta != 0:
             send_fps = int(1 / send_delta)
-            if send_fps > 50:
-                send_fps = 50
-                if send_fps > 10:
-                    w_custom = w_custom + 2
-                if send_fps < 10:
-                    w_custom = w_custom - 2
-                print(w_custom)
+            if send_fps > 10:
+                w_custom = w_custom + 2
+            if send_fps < 10:
+                w_custom = w_custom - 2
+            print(w_custom)
         else:
             pass
         
