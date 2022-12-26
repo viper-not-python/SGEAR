@@ -69,7 +69,7 @@ checking_internet = False
 sending = False
 
 w_custom = 500
-fps_change = 2
+
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -239,6 +239,11 @@ def check_internet():
         checking_internet == True
         Thread(target=int_ping).start()
 
+def fps_c(fps):
+    fps_change = abs(fps - 10)
+    return math.pow(fps_change, 2)
+
+
 def send():
     global sending, connected, w_custom
     try:
@@ -251,14 +256,11 @@ def send():
             send_fps = int(1 / send_delta)
             
             if send_fps > 10:
-                w_custom = w_custom + fps_change
-                print(">10")
+                w_custom = w_custom + fps_c(send_fps)
             if send_fps < 10:
-                w_custom = w_custom - fps_change
-                print("<10")
-            print(send_fps, w_custom)
+                w_custom = w_custom - fps_c(send_fps)
         else:
-            print("null")
+            pass
         
     except:
         connected = False
