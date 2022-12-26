@@ -66,6 +66,8 @@ socket_initialized = False
 internet = False
 checking_internet = False
 
+sending = False
+
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
     direction = direction *-1
@@ -198,7 +200,7 @@ def socket_initialize():
     # Socket Create
     server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     host_name  = socket.gethostname()
-    host_ip = '192.168.170.208'
+    host_ip = '192.168.170.36'
 
     port = 9999
     socket_address = (host_ip,port)
@@ -233,6 +235,20 @@ def check_internet():
     if checking_internet == False:
         checking_internet == True
         Thread(target=int_ping).start()
+
+def send():
+    global sending, connected
+    try:
+        client_socket.sendall(message)
+    except:
+        connected = False
+    sending = False
+
+def thread_send():
+    global sending
+    sending = True
+    Thread(target=send).start()
+    
 
 while True:
     ret, frame = stream.read()
@@ -317,12 +333,13 @@ while True:
         socket_initialized = True
 
     if socket_initialized == True:
-        frame = imutils.resize(frame,width=150)
+        frame = imutils.resize(frame,width=500)
         var_a = pickle.dumps(frame)
         message = struct.pack("Q",len(var_a))+var_a
         if connected == True:
             try:
-                client_socket.sendall(message)
+                if sending == False:
+                    thread_send()
             except:
                 connected = False
         else:
