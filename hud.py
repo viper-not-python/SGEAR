@@ -243,7 +243,7 @@ def fps_c(fps, o):
     fps_change = abs(fps - 10)
     fps_change = int(0.5 * math.pow(fps_change, 2))
     fps_change = 2
-    print(fps_change, o)
+    print(fps, fps_change, o)
     return fps_change
 
 
