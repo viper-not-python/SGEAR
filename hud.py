@@ -241,7 +241,7 @@ def check_internet():
 
 def fps_c(fps):
     fps_change = abs(fps - 10)
-    fps_change = 0.5 * math.pow(fps_change, 2)
+    fps_change = int(0.5 * math.pow(fps_change, 2))
     print(fps_change) 
 
 
