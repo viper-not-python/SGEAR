@@ -69,7 +69,7 @@ checking_internet = False
 sending = False
 
 w_custom = 500
-fps_change = 10
+fps_change = 2
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
