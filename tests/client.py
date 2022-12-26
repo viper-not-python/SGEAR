@@ -23,9 +23,12 @@ while True:
         frame_data = data[:msg_size]
         data  = data[msg_size:]
         frame = pickle.loads(frame_data)
+        h, w, c = frame.shape
+        res = str(h)
         frame = cv2.resize(frame, (680, 383))
         sharpen_filter = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])    
         frame = cv2.filter2D(frame, ddepth=-1, kernel=sharpen_filter)
+        cv2.putText(frame, res, (0, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1) 
         cv2.imshow("FEED",frame)
     except:
         time.sleep(1)
