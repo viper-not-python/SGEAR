@@ -190,6 +190,10 @@ def try_connection():
         pass
 
 def socket_initialize():
+    w = int(width / 2)
+    h = int(height / 2)
+    cv2.putText(frame, "CONNECTING INTERNET", (w,h), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    time.sleep(1)
     global socket_initialized, trying_to_connect, connected, host_name, host_ip, socket_address, port, server_socket
     # Socket Create
     server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
