@@ -257,14 +257,11 @@ def send():
         send_delta = float(send_delta.total_seconds())
         if send_delta != 0:
             send_fps = int(1 / send_delta)
-            
             if w_custom < 500:
                 if send_fps > 15:
                     w_custom = w_custom + 2
                 if send_fps < 15:
-                    w_custom = w_custom - 2
-            cv2.putText(frame, w_custom, (200, 50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
-                
+                    w_custom = w_custom - 2                
         else:
             pass
         
@@ -341,11 +338,14 @@ while True:
     
     get_master_text()   #text from hud_master.py
     
-    mpu()    
+    mpu()   
+    
+    cv2.putText(frame, w_custom, (200, 50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)     #w_custom
 
     frame = cv2.resize(frame, (width, height))
     cv2.imshow("1", frame)
     cv2.imshow("2", frame)
+
     if moved == False:
         cv2.moveWindow("1", -250, 100)
         cv2.moveWindow("2", 1280+500, 100)
