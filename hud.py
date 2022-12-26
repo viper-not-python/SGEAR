@@ -249,16 +249,16 @@ def send():
         send_delta = float(send_delta.total_seconds())
         if send_delta != 0:
             send_fps = int(1 / send_delta)
-            print(send_fps)
+            
             if send_fps < 10:
                 w_custom = w_custom - fps_change
             if send_fps > 10:
                 w_custom = w_custom + fps_change
+            print(send_fps, w_custom)
         else:
             print("null")
         
-    except Exception as e:
-        print(e)
+    except:
         connected = False
     sending = False
 
