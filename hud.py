@@ -68,6 +68,9 @@ checking_internet = False
 
 sending = False
 
+w_custom = 500
+fps_change = 1
+
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
     direction = direction *-1
@@ -237,10 +240,25 @@ def check_internet():
         Thread(target=int_ping).start()
 
 def send():
-    global sending, connected
+    global sending, connected, w_custom
     try:
+        send_a = datetime.datetime.now()
         client_socket.sendall(message)
-    except:
+        send_b = datetime.datetime.now()
+        send_delta = send_b - send_a
+        send_delta = float(send_delta.total_seconds())
+        if send_delta != 0:
+            send_fps = int(1 / send_delta)
+            print(send_fps)
+            if send_fps < 10:
+                w_custom = w_custom - fps_change
+            if send_fps > 10:
+                w_custom = w_custom + fps_change
+        else:
+            print("null")
+        
+    except Exception as e:
+        print(e)
         connected = False
     sending = False
 
@@ -333,7 +351,7 @@ while True:
         socket_initialized = True
 
     if socket_initialized == True:
-        frame = imutils.resize(frame,width=500)
+        frame = imutils.resize(frame,width=w_custom)
         var_a = pickle.dumps(frame)
         message = struct.pack("Q",len(var_a))+var_a
         if connected == True:
