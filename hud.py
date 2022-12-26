@@ -340,8 +340,6 @@ while True:
     
     mpu()   
     
-    cv2.putText(frame, str(w_custom), (200, 50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)     #w_custom
-
     frame = cv2.resize(frame, (width, height))
     cv2.imshow("1", frame)
     cv2.imshow("2", frame)
@@ -373,6 +371,7 @@ while True:
         else:
             try_connection()
 
+    print(w_custom)
     if (cv2.waitKey(1)==ord("q")):
         break
 
