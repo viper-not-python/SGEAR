@@ -265,6 +265,7 @@ def send():
             if w_custom == 500:
                 print("reached")
                 w_custom = w_custom - 2
+            print(w_custom, send_fps)
         else:
             pass
         
@@ -374,7 +375,6 @@ while True:
         else:
             try_connection()
 
-    print(w_custom)
     if (cv2.waitKey(1)==ord("q")):
         break
 
