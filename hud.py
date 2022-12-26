@@ -258,10 +258,11 @@ def send():
         if send_delta != 0:
             send_fps = int(1 / send_delta)
             if w_custom < 500:
-                if send_fps > 10:
+                if send_fps > 15:
                     w_custom = w_custom + 2
-                if send_fps < 10:
+                if send_fps < 15:
                     w_custom = w_custom - 2
+                cv2.putText(frame, w_custom, (200, 50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)   #time
         else:
             pass
         
