@@ -263,6 +263,7 @@ def send():
                     w_custom = w_custom + 2
                 if send_fps < 10:
                     w_custom = w_custom - 2
+                print(w_custom)
         else:
             pass
         
