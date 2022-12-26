@@ -250,9 +250,9 @@ def send():
         if send_delta != 0:
             send_fps = int(1 / send_delta)
             
-            if send_fps < 10:
-                w_custom = w_custom - fps_change
             if send_fps > 10:
+                w_custom = w_custom - fps_change
+            if send_fps < 10:
                 w_custom = w_custom + fps_change
             print(send_fps, w_custom)
         else:
