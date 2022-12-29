@@ -373,6 +373,9 @@ while True:
         else:
             try_connection()
 
+    if internet == True and connected == False:
+        print("no vpn")
+
     if (cv2.waitKey(1)==ord("q")):
         break
 
