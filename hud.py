@@ -275,6 +275,10 @@ def thread_send():
     global sending
     sending = True
     Thread(target=send).start()
+
+#def vpn_active():
+
+#    return status
     
 
 while True:
@@ -373,8 +377,8 @@ while True:
         else:
             try_connection()
 
-    if internet == True and connected == False:
-        print("no vpn")
+    #if internet == True and vpn_active() == False:
+    #    print("no vpn")
 
     if (cv2.waitKey(1)==ord("q")):
         break
