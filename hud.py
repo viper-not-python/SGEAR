@@ -276,9 +276,14 @@ def thread_send():
     sending = True
     Thread(target=send).start()
 
-#def vpn_active():
+def vpn_active():
+    status = os.system("ping 192.168.170.1 -c 1")
+    return status
 
-#    return status
+def reconnect_wifi():
+    os.system("rfkill block wifi")
+    time.sleep(0.5)
+    os.system("rfkill unblock wifi")
     
 
 while True:
@@ -377,8 +382,8 @@ while True:
         else:
             try_connection()
 
-    #if internet == True and vpn_active() == False:
-    #    print("no vpn")
+    if vpn_active() != 0:
+        Thread(target=reconnect_wifi).start()
 
     if (cv2.waitKey(1)==ord("q")):
         break
