@@ -312,7 +312,7 @@ def reconnect_wifi():
     starting_vpn = False
 
 def serial_read():
-    global ser
+    global ser, starting_ser
     try:
         SerialIn = serial.Serial("/dev/ttyUSB0",9600)
         ser = True
@@ -321,6 +321,7 @@ def serial_read():
         ser = False
         print("ser = false")
         print(e)
+    starting_ser = False
 
     def get_data(type_):
         data = SerialIn.readline()
@@ -351,15 +352,13 @@ def serial_read():
         with open("serial/distance.txt", "w") as d:    #distance
             d.write(distance_str)
 
-
-    while True:
+    while ser == True:
         try:
             try_voltage()            
             try_distance()
             time.sleep(0.01)
         except:
             ser = False
-            break
 
 Thread(target=vpn_active).start()
 
@@ -463,7 +462,8 @@ while True:
         starting_vpn = True
         Thread(target=reconnect_wifi).start()
 
-    if ser == False:    
+    if ser == False and starting_ser == False:  
+        starting_ser = True
         Thread(target=serial_read).start()
 
     if (cv2.waitKey(1)==ord("q")):
