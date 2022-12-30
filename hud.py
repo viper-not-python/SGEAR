@@ -67,6 +67,7 @@ internet = False
 checking_internet = False
 
 starting_vpn = False
+vpn = False
 
 sending = False
 
@@ -392,7 +393,6 @@ while True:
 
     if internet == True and socket_initialized == False:
         socket_initialize()
-        socket_initialized = True
 
     if socket_initialized == True:
         frame = imutils.resize(frame,width=w_custom)
