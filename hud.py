@@ -12,8 +12,8 @@ import socket
 import pickle
 import imutils
 from threading import Thread
-from pythonping import ping
 import serial
+import subprocess
 
 #python setup
 
@@ -200,10 +200,6 @@ def try_connection():
         pass
 
 def socket_initialize():
-    w = int(width / 2)
-    h = int(height / 2)
-    cv2.putText(frame, "CONNECTING INTERNET", (w,h), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
-    time.sleep(1)
     global socket_initialized, trying_to_connect, connected, host_name, host_ip, socket_address, port, server_socket
     # Socket Create
     server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -227,16 +223,10 @@ def is_inet_active():
 
 
     try:
-        response_list = ping('arg.spdns.org', count = 1)
-
-        if response_list.rtt_avg_ms > 800:
-            status = False
-        else:
-            status = True
+        subprocess.check_output(["ping", "-c", "1", "arg.spdns.org"])
+        status = True
     except:
         status = False
-
-    #status = True
     
     return status
 
@@ -246,6 +236,8 @@ def int_ping():
 
     if is_inet_active() == True:
         internet = True
+    else:
+        internet = False
     checking_internet = False
 
 def check_internet():
@@ -297,16 +289,12 @@ def vpn_active():
 
 
         try:
-            response_list = ping('192.168.170.1', count = 1)
-
-            if response_list.rtt_avg_ms > 800:
-                vpn = False
-            else:
-                vpn = True
+            subprocess.check_output(["ping", "-c", "1", "192.168.170.1"])
+            vpn = True
         except:
             vpn = False
 
-        #vpn = True
+
 
         time.sleep(2)
 
