@@ -221,15 +221,19 @@ def socket_initialize():
     socket_initialized = True
 
 def is_inet_active():
-    try:
-        response_list = ping('arg.spdns.org', count = 1)
 
-        if response_list.rtt_avg_ms > 800:
-            status = False
-        else:
-            status = True
-    except:
-        status = False
+
+    #try:
+    #    response_list = ping('arg.spdns.org', count = 1)
+
+    #    if response_list.rtt_avg_ms > 800:
+    #        status = False
+    #    else:
+    #        status = True
+    #except:
+    #    status = False
+
+    status = True
     
     return status
 
@@ -287,15 +291,20 @@ def thread_send():
 def vpn_active():
     global vpn
     while True:
-        try:
-            response_list = ping('192.168.170.1', count = 1)
 
-            if response_list.rtt_avg_ms > 800:
-                vpn = False
-            else:
-                vpn = True
-        except:
-            vpn = False
+
+        #try:
+        #    response_list = ping('192.168.170.1', count = 1)
+
+        #    if response_list.rtt_avg_ms > 800:
+        #        vpn = False
+        #    else:
+        #        vpn = True
+        #except:
+        #    vpn = False
+
+        vpn = True
+
         time.sleep(0.5)
 
 def reconnect_wifi():
