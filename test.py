@@ -1,9 +1,4 @@
-import subprocess
+import pyperclip
 
-try:
-    subprocess.check_output(["ping", "-c", "1", "192.168.170.1"])
-    status = True
-except:
-    status = False
-
-print(status)
+with open("test.jpg", "w") as t:
+    t.write(pyperclip.paste())

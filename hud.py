@@ -418,9 +418,6 @@ while True:
     
     a = datetime.datetime.now()
 
-    if ser == False:    
-        Thread(target=serial_read).start()
-
     battery_status = get_battery()
     distance = get_distance()
     cv2.putText(frame, battery_status, (0,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
@@ -465,6 +462,9 @@ while True:
     if vpn == False and starting_vpn == False and internet == True:
         starting_vpn = True
         Thread(target=reconnect_wifi).start()
+
+    if ser == False:    
+        Thread(target=serial_read).start()
 
     if (cv2.waitKey(1)==ord("q")):
         break
