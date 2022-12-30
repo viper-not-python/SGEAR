@@ -223,17 +223,17 @@ def socket_initialize():
 def is_inet_active():
 
 
-    #try:
-    #    response_list = ping('arg.spdns.org', count = 1)
+    try:
+        response_list = ping('arg.spdns.org', count = 1)
 
-    #    if response_list.rtt_avg_ms > 800:
-    #        status = False
-    #    else:
-    #        status = True
-    #except:
-    #    status = False
+        if response_list.rtt_avg_ms > 800:
+            status = False
+        else:
+            status = True
+    except:
+        status = False
 
-    status = True
+    #status = True
     
     return status
 
