@@ -68,13 +68,10 @@ internet = False
 checking_internet = False
 
 starting_vpn = False
-starting_ser = False
 
 sending = False
 
 w_custom = 500
-
-ser = False
 
 with open ("cmd/status.txt", "w") as stat:
     stat.write("nopic")
@@ -312,55 +309,6 @@ def reconnect_wifi():
     time.sleep(2)
     starting_vpn = False
 
-def serial_read():
-    global ser, starting_ser
-    try:
-        SerialIn = serial.Serial("/dev/ttyUSB0",9600)
-        ser = True
-        print("ser = true")
-    except Exception as e:
-        ser = False
-        print("ser = false")
-        print(e)
-    starting_ser = False
-
-    def get_data(type_):
-        data = SerialIn.readline()
-        data = data.decode()
-    
-        if type_ == "str":
-            return data
-        if type_ == "int":
-            data = int(data)
-            return data
-
-    def try_voltage():
-        voltage = get_data("str")[0:4]
-        voltage = voltage[0:2] + "." + voltage [2:4]
-        battery_status = voltage + " V"
-        with open("serial/voltage.txt", "w") as v:    #battery_voltage
-            v.write(battery_status)
-
-    def try_distance():
-        dta = get_data("str")
-        i1 = dta.find("u") + 1
-        i2 = dta.find("x")
-        distance_str = dta[i1:i2]
-        distance = int(distance_str)
-        distance_str = distance_str + "cm"
-        if distance == 0:
-            distance_str = "error"
-        with open("serial/distance.txt", "w") as d:    #distance
-            d.write(distance_str)
-
-    while ser == True:
-        try:
-            try_voltage()            
-            try_distance()
-            time.sleep(0.01)
-        except:
-            ser = False
-
 Thread(target=vpn_active).start()
 
 while True:
@@ -462,10 +410,6 @@ while True:
     if vpn == False and starting_vpn == False and internet == True:
         starting_vpn = True
         Thread(target=reconnect_wifi).start()
-
-    if ser == False and starting_ser == False:  
-        starting_ser = True
-        Thread(target=serial_read).start()
 
     if (cv2.waitKey(1)==ord("q")):
         break
