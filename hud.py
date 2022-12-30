@@ -211,14 +211,17 @@ def socket_initialize():
     socket_address = (host_ip,port)
 
     # Socket Bind
-    server_socket.bind(socket_address)
+    try:
+        server_socket.bind(socket_address)
+        socket_initialized = True
+    except:
+        socket_initialized = False
 
     # Socket Listen
     server_socket.listen(5)
 
     connected = False
     trying_to_connect = False
-    socket_initialized = True
 
 def is_inet_active():
 
