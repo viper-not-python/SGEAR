@@ -284,9 +284,12 @@ def vpn_active():
 
 def reconnect_wifi():
     os.system("rfkill block wifi")
+    print("blocked")
     time.sleep(0.5)
     os.system("rfkill unblock wifi")
-    time.sleep(10)    
+    print("unblocked")
+    time.sleep(10)
+    print("waited")
 
 while True:
     ret, frame = stream.read()
