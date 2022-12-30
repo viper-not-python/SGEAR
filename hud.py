@@ -283,10 +283,10 @@ def vpn_active():
     return status
 
 def reconnect_wifi():
-    os.system("rfkill block wifi")
+    #os.system("rfkill block wifi")
     print("blocked")
     time.sleep(0.5)
-    os.system("rfkill unblock wifi")
+    #os.system("rfkill unblock wifi")
     print("unblocked")
     time.sleep(15)
     print("waited")
