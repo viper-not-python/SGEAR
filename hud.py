@@ -459,7 +459,7 @@ while True:
         else:
             try_connection()
 
-    if vpn == False and starting_vpn == False:
+    if vpn == False and starting_vpn == False and internet == True:
         starting_vpn = True
         Thread(target=reconnect_wifi).start()
 
