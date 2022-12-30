@@ -402,8 +402,7 @@ while True:
 
     if vpn_active() == False:
         print("vpn down")
-        #Thread(target=reconnect_wifi).start()
-        reconnect_wifi()
+        Thread(target=reconnect_wifi).start()
     else:
         print("vpn up")
 
