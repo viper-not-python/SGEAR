@@ -12,7 +12,6 @@ import socket
 import pickle
 import imutils
 from threading import Thread
-import serial
 import subprocess
 
 #python setup
@@ -72,10 +71,6 @@ starting_vpn = False
 sending = False
 
 w_custom = 500
-
-with open ("cmd/status.txt", "w") as stat:
-    stat.write("nopic")
-
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
