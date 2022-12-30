@@ -301,13 +301,11 @@ def vpn_active():
 def reconnect_wifi():
     global starting_vpn
     os.system("rfkill block wifi")
-    print("blocked")
     time.sleep(2)
     os.system("rfkill unblock wifi")
-    print("unblocked")
     while is_inet_active() == False:
-        time.sleep(0.2)
-    time.sleep(1)
+        time.sleep(0.5)
+    time.sleep(2)
     starting_vpn = False
 
 def serial_read():
