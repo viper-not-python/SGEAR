@@ -75,6 +75,9 @@ w_custom = 500
 
 ser = False
 
+with open ("cmd/status.txt", "w") as stat:
+    stat.write("nopic")
+
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
