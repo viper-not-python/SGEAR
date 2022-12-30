@@ -293,19 +293,19 @@ def vpn_active():
     while True:
 
 
-        #try:
-        #    response_list = ping('192.168.170.1', count = 1)
+        try:
+            response_list = ping('192.168.170.1', count = 1)
 
-        #    if response_list.rtt_avg_ms > 800:
-        #        vpn = False
-        #    else:
-        #        vpn = True
-        #except:
-        #    vpn = False
+            if response_list.rtt_avg_ms > 800:
+                vpn = False
+            else:
+                vpn = True
+        except:
+            vpn = False
 
-        vpn = True
+        #vpn = True
 
-        time.sleep(0.5)
+        time.sleep(2)
 
 def reconnect_wifi():
     global starting_vpn
