@@ -220,7 +220,7 @@ def socket_initialize():
 
 def is_inet_active():
     try:
-        response_list = ping('args.spdns.org', count = 1)
+        response_list = ping('arg.spdns.org', count = 1)
 
         if response_list.rtt_avg_ms > 800:
             status = False
