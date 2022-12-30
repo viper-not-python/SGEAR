@@ -284,7 +284,7 @@ def reconnect_wifi():
     os.system("rfkill block wifi")
     time.sleep(0.5)
     os.system("rfkill unblock wifi")
-    
+    time.sleep(8)    
 
 while True:
     ret, frame = stream.read()
@@ -383,7 +383,7 @@ while True:
             try_connection()
 
     if vpn_active() != 0:
-        #Thread(target=reconnect_wifi).start()
+        Thread(target=reconnect_wifi).start()
         print("vpn down")
     else:
         print("vpn up")
