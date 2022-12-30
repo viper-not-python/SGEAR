@@ -1,8 +1,18 @@
-from tcping import Ping
-ping = Ping('192.168.170.1', 80, 1)
+from pythonping import ping
+
+#if 'Reply' in ping('192.168.170.1', timeout=1):
+#    status = True
+#else:
+#    status = False
+
+
 try:
-    ping.ping(1)
-    status = True
+    response_list = ping('args.spdns.org', count = 1)
+
+    if response_list.rtt_avg_ms > 800:
+        status = False
+    else:
+        status = True
 except:
     status = False
 

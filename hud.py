@@ -12,7 +12,7 @@ import socket
 import pickle
 import imutils
 from threading import Thread
-from tcping import Ping
+from pythonping import ping
 
 #python setup
 
@@ -219,10 +219,13 @@ def socket_initialize():
     socket_initialized = True
 
 def is_inet_active():
-    ping = Ping('arg.spdns.org', 80, 1)
     try:
-        ping.ping(1)
-        status = True
+        response_list = ping('args.spdns.org', count = 1)
+
+        if response_list.rtt_avg_ms > 800:
+            status = False
+        else:
+            status = True
     except:
         status = False
     
@@ -280,10 +283,13 @@ def thread_send():
     Thread(target=send).start()
 
 def vpn_active():
-    ping = Ping('192.168.170.1', 80, 1)
     try:
-        ping.ping(1)
-        status = True
+        response_list = ping('192.168.170.1', count = 1)
+
+        if response_list.rtt_avg_ms > 800:
+            status = False
+        else:
+            status = True
     except:
         status = False
     return status
