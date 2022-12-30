@@ -288,7 +288,7 @@ def reconnect_wifi():
     time.sleep(2)
     os.system("rfkill unblock wifi")
     print("unblocked")
-    time.sleep(60)
+    input()
     print("waited")
 
 while True:
