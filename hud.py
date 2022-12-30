@@ -68,6 +68,7 @@ internet = False
 checking_internet = False
 
 starting_vpn = False
+starting_ser = False
 
 sending = False
 
