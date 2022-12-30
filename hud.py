@@ -283,18 +283,21 @@ def thread_send():
     Thread(target=send).start()
 
 def vpn_active():
-    try:
-        response_list = ping('192.168.170.1', count = 1)
+    global vpn
+    while True:
+        try:
+            response_list = ping('192.168.170.1', count = 1)
 
-        if response_list.rtt_avg_ms > 800:
-            status = False
-        else:
-            status = True
-    except:
-        status = False
-    return status
+            if response_list.rtt_avg_ms > 800:
+                vpn = False
+            else:
+                vpn = True
+        except:
+            vpn = False
+        time.sleep(0.5)
 
 def reconnect_wifi():
+    global starting_vpn
     os.system("rfkill block wifi")
     print("blocked")
     time.sleep(2)
@@ -303,6 +306,9 @@ def reconnect_wifi():
     while is_inet_active() == False:
         time.sleep(0.2)
     time.sleep(1)
+    starting_vpn = False
+
+Thread(target=vpn_active).start()
 
 while True:
     ret, frame = stream.read()
@@ -400,7 +406,8 @@ while True:
         else:
             try_connection()
 
-    if vpn_active() == False:
+    if vpn == False and starting_vpn == False:
+        starting_vpn = True
         print("vpn down")
         Thread(target=reconnect_wifi).start()
     else:
