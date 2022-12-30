@@ -285,10 +285,10 @@ def vpn_active():
 def reconnect_wifi():
     os.system("rfkill block wifi")
     print("blocked")
-    time.sleep(1)
+    time.sleep(2)
     os.system("rfkill unblock wifi")
     print("unblocked")
-    time.sleep(30)
+    time.sleep(60)
     print("waited")
 
 while True:
