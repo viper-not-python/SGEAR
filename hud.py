@@ -410,10 +410,7 @@ while True:
 
     if vpn == False and starting_vpn == False:
         starting_vpn = True
-        print("vpn down")
         Thread(target=reconnect_wifi).start()
-    else:
-        print("vpn up")
 
     if (cv2.waitKey(1)==ord("q")):
         break
