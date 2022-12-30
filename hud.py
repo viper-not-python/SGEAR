@@ -279,17 +279,16 @@ def thread_send():
     Thread(target=send).start()
 
 def vpn_active():
-    #status = os.system("ping 192.168.170.1 -c 1")
-    status = 10
+    status = os.system("ping 192.168.170.1 -c 1")
     return status
 
 def reconnect_wifi():
-    #os.system("rfkill block wifi")
+    os.system("rfkill block wifi")
     print("blocked")
-    #time.sleep(0.5)
-    #os.system("rfkill unblock wifi")
+    time.sleep(0.5)
+    os.system("rfkill unblock wifi")
     print("unblocked")
-    #time.sleep(15)
+    time.sleep(15)
     print("waited")
 
 while True:
