@@ -66,6 +66,8 @@ socket_initialized = False
 internet = False
 checking_internet = False
 
+starting_vpn = False
+
 sending = False
 
 w_custom = 500
