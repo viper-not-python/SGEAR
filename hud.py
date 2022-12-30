@@ -209,14 +209,13 @@ def socket_initialize():
     print("trying")
     try:
         server_socket.bind(socket_address)
+        # Socket Listen
+        server_socket.listen(5)
         socket_initialized = True
         print("succeess")
     except:
         socket_initialized = False
         print("failed")
-
-    # Socket Listen
-    server_socket.listen(5)
 
     connected = False
     trying_to_connect = False
