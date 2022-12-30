@@ -218,18 +218,20 @@ def socket_initialize():
     trying_to_connect = False
     socket_initialized = True
 
-def is_inet_active(timeout):
-    try:
-        requests.head("https://google.com", timeout=timeout)
-        return True
-    except requests.ConnectionError:
-        return False
+def is_inet_active():
+    response = os.system("ping arg.spdns.org -c 1")
+    if response == 0:
+        status = True
+    else:
+        status = False
+    
+    return status
 
 
 def int_ping():
     global checking_internet, internet
 
-    if is_inet_active(1) == True:
+    if is_inet_active() == True:
         internet = True
     checking_internet = False
 
@@ -284,7 +286,7 @@ def reconnect_wifi():
     os.system("rfkill block wifi")
     time.sleep(0.5)
     os.system("rfkill unblock wifi")
-    time.sleep(8)    
+    time.sleep(10)    
 
 while True:
     ret, frame = stream.read()
