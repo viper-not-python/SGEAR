@@ -12,7 +12,7 @@ import socket
 import pickle
 import imutils
 from threading import Thread
-import requests
+from tcping import Ping
 
 #python setup
 
@@ -219,10 +219,11 @@ def socket_initialize():
     socket_initialized = True
 
 def is_inet_active():
-    response = os.system("ping arg.spdns.org -c 1")
-    if response == 0:
+    ping = Ping('arg.spdns.org', 80, 1)
+    try:
+        ping.ping(1)
         status = True
-    else:
+    except:
         status = False
     
     return status
@@ -279,7 +280,12 @@ def thread_send():
     Thread(target=send).start()
 
 def vpn_active():
-    status = os.system("ping 192.168.170.1 -c 1")
+    ping = Ping('192.168.170.1', 80, 1)
+    try:
+        ping.ping(1)
+        status = True
+    except:
+        status = False
     return status
 
 def reconnect_wifi():
@@ -290,6 +296,7 @@ def reconnect_wifi():
     print("unblocked")
     while is_inet_active() == False:
         time.sleep(0.2)
+    time.sleep(1)
 
 while True:
     ret, frame = stream.read()
@@ -387,7 +394,7 @@ while True:
         else:
             try_connection()
 
-    if vpn_active() != 0:
+    if vpn_active() == False:
         print("vpn down")
         #Thread(target=reconnect_wifi).start()
         reconnect_wifi()
