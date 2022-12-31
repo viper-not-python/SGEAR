@@ -309,15 +309,17 @@ def vpn_active():
 
         time.sleep(2)
 
-#def reconnect_wifi():
-#    global starting_vpn
-#    os.system("rfkill block wifi")
-#    time.sleep(2)
-#    os.system("rfkill unblock wifi")
-#    while is_inet_active() == False:
-#        time.sleep(0.5)
-#    time.sleep(2)
-#    starting_vpn = False
+def reconnect_wifi():
+    global starting_vpn
+    os.system("rfkill block wifi")
+    time.sleep(2)
+    os.system("rfkill unblock wifi")
+    while base == False:
+        if vpn == True:
+            break
+        time.sleep(0.5)
+    time.sleep(2)
+    starting_vpn = False
 
 Thread(target=vpn_active).start()
 
@@ -419,9 +421,9 @@ while True:
         else:
             try_connection()
 
-    #if vpn == False and starting_vpn == False and internet == True and base == False:
-    #    starting_vpn = True
-    #    Thread(target=reconnect_wifi).start()
+    if vpn == True and starting_vpn == False and base == False:
+        starting_vpn = True
+        Thread(target=reconnect_wifi).start()
 
     if (cv2.waitKey(1)==ord("q")):
         break
