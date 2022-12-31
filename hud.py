@@ -276,6 +276,7 @@ def send():
                 w_custom = w_custom + 2
         else:
             pass
+        w_custom = 175
         
     except:
         connected = False
