@@ -63,12 +63,8 @@ pic = False
 c_s = 0
 
 socket_initialized = False
-socket_initialized_base = False
 internet = False
 checking_internet = False
-connected = False
-trying_to_connect = False
-init = False
 
 starting_vpn = False
 vpn = False
@@ -190,7 +186,7 @@ def mpu():
     pass
    
 def connect():
-    global client_socket, addr, connected, trying_to_connect, server_socket
+    global client_socket, addr, connected, trying_to_connect
     client_socket,addr = server_socket.accept()
     connected = True
     trying_to_connect = False
@@ -208,11 +204,8 @@ def socket_initialize():
     # Socket Create
     server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     host_name  = socket.gethostname()
-    
-    
     host_ip = '192.168.170.208'
 
-    
     port = 9999
     socket_address = (host_ip,port)
 
@@ -264,7 +257,7 @@ def check_internet():
 
 
 def send():
-    global sending, connected, w_custom, send_fps, client_socket
+    global sending, connected, w_custom, send_fps
     try:
         send_a = datetime.datetime.now()
         client_socket.sendall(message)
@@ -303,14 +296,8 @@ def vpn_active():
         try:
             subprocess.check_output(["ping", "-c", "1", "192.168.170.1"])
             vpn = True
-            base = False
         except:
             vpn = False
-            try:
-                subprocess.check_output(["ping", "-c", "1", "192.168.188.1"])
-                base = True
-            except:
-                base = False
 
         try:
             subprocess.check_output(["ping", "-c", "1", "192.168.188.1"])
@@ -416,17 +403,8 @@ while True:
     if internet == False:
         check_internet()
 
-    if connected == False:
-        socket_initialized = False
-        if init == True:
-            client_socket.close()
-        
     if internet == True and socket_initialized == False:
         socket_initialize()
-        init = True
-
-    if connected == False:
-        try_connection()
 
     if socket_initialized == True:
         frame = imutils.resize(frame,width=w_custom)
@@ -438,15 +416,12 @@ while True:
                     thread_send()
             except:
                 connected = False
-            
+        else:
+            try_connection()
+
     if vpn == False and starting_vpn == False and internet == True and base == False:
         starting_vpn = True
         Thread(target=reconnect_wifi).start()
-
-    if base == True:
-        print("base")
-    if vpn == True:
-        print("vpn")
 
     if (cv2.waitKey(1)==ord("q")):
         break
