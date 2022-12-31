@@ -189,7 +189,7 @@ def mpu():
     pass
    
 def connect():
-    global client_socket, addr, connected, trying_to_connect
+    global client_socket, addr, connected, trying_to_connect, server_socket
     client_socket,addr = server_socket.accept()
     connected = True
     trying_to_connect = False
@@ -263,7 +263,7 @@ def check_internet():
 
 
 def send():
-    global sending, connected, w_custom, send_fps
+    global sending, connected, w_custom, send_fps, client_socket
     try:
         send_a = datetime.datetime.now()
         client_socket.sendall(message)
