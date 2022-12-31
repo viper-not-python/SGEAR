@@ -72,6 +72,7 @@ init = False
 
 starting_vpn = False
 vpn = False
+base = False
 
 sending = False
 
@@ -310,6 +311,12 @@ def vpn_active():
                 base = True
             except:
                 base = False
+
+        try:
+            subprocess.check_output(["ping", "-c", "1", "192.168.188.1"])
+            base = True
+        except:
+            base = False
 
 
 
