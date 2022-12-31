@@ -66,6 +66,7 @@ socket_initialized = False
 socket_initialized_base = False
 internet = False
 checking_internet = False
+connected = False
 
 starting_vpn = False
 vpn = False
