@@ -423,6 +423,8 @@ while True:
         starting_vpn = True
         Thread(target=reconnect_wifi).start()
 
+    print(vpn, base)
+
     if (cv2.waitKey(1)==ord("q")):
         break
 
