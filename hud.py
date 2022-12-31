@@ -204,7 +204,7 @@ def socket_initialize():
     # Socket Create
     server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     host_name  = socket.gethostname()
-    host_ip = '192.168.170.208'
+    host_ip = '192.168.188.21'
 
     port = 9999
     socket_address = (host_ip,port)
@@ -221,32 +221,32 @@ def socket_initialize():
     connected = False
     trying_to_connect = False
 
-def is_inet_active():
+#def is_inet_active():
 
 
-    try:
-        subprocess.check_output(["ping", "-c", "1", "arg.spdns.org"])
-        status = True
-    except:
-        status = False
+#    try:
+#        subprocess.check_output(["ping", "-c", "1", "arg.spdns.org"])
+#        status = True
+#    except:
+#        status = False
     
-    return status
+#    return status
 
 
-def int_ping():
-    global checking_internet, internet
+#def int_ping():
+#    global checking_internet, internet
 
-    if is_inet_active() == True:
-        internet = True
-    else:
-        internet = False
-    checking_internet = False
+#    if is_inet_active() == True:
+#        internet = True
+#    else:
+#        internet = False
+#    checking_internet = False
 
-def check_internet():
-    global checking_internet
-    if checking_internet == False:
-        checking_internet == True
-        Thread(target=int_ping).start()
+#def check_internet():
+#    global checking_internet
+#    if checking_internet == False:
+#        checking_internet == True
+#        Thread(target=int_ping).start()
 
 #def fps_c(fps, o):
 #    fps_change = abs(fps - 10)
@@ -293,11 +293,11 @@ def vpn_active():
     while True:
 
 
-        try:
-            subprocess.check_output(["ping", "-c", "1", "192.168.170.1"])
-            vpn = True
-        except:
-            vpn = False
+        #try:
+        #    subprocess.check_output(["ping", "-c", "1", "192.168.170.1"])
+        #    vpn = True
+        #except:
+        #    vpn = False
 
         try:
             subprocess.check_output(["ping", "-c", "1", "192.168.188.1"])
@@ -309,15 +309,15 @@ def vpn_active():
 
         time.sleep(2)
 
-def reconnect_wifi():
-    global starting_vpn
-    os.system("rfkill block wifi")
-    time.sleep(2)
-    os.system("rfkill unblock wifi")
-    while is_inet_active() == False:
-        time.sleep(0.5)
-    time.sleep(2)
-    starting_vpn = False
+#def reconnect_wifi():
+#    global starting_vpn
+#    os.system("rfkill block wifi")
+#    time.sleep(2)
+#    os.system("rfkill unblock wifi")
+#    while is_inet_active() == False:
+#        time.sleep(0.5)
+#    time.sleep(2)
+#    starting_vpn = False
 
 Thread(target=vpn_active).start()
 
@@ -392,6 +392,7 @@ while True:
     frame = cv2.resize(frame, (width, height))
     cv2.imshow("1", frame)
     cv2.imshow("2", frame)
+    cv2.imwrite("stream.jpg", frame)
 
     if moved == False:
         cv2.moveWindow("1", -250, 100)
@@ -400,10 +401,10 @@ while True:
     else:
         pass
     
-    if internet == False:
-        check_internet()
+    #if internet == False:
+    #    check_internet()
 
-    if internet == True and socket_initialized == False:
+    if base == True and socket_initialized == False:        #if internet == True
         socket_initialize()
 
     if socket_initialized == True:
@@ -419,11 +420,9 @@ while True:
         else:
             try_connection()
 
-    if vpn == False and starting_vpn == False and internet == True and base == False:
-        starting_vpn = True
-        Thread(target=reconnect_wifi).start()
-
-    print(vpn, base)
+    #if vpn == False and starting_vpn == False and internet == True and base == False:
+    #    starting_vpn = True
+    #    Thread(target=reconnect_wifi).start()
 
     if (cv2.waitKey(1)==ord("q")):
         break
