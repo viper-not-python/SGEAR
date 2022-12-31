@@ -392,7 +392,6 @@ while True:
     frame = cv2.resize(frame, (width, height))
     cv2.imshow("1", frame)
     cv2.imshow("2", frame)
-    cv2.imwrite("stream.jpg", frame)
 
     if moved == False:
         cv2.moveWindow("1", -250, 100)
