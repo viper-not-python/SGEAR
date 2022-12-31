@@ -54,7 +54,6 @@ time_now = time_now[11:22]
 time_then = None
 
 a = datetime.datetime.now()
-send_a = datetime.datetime.now()
 time.sleep(0.001)
 
 moved = False
@@ -259,20 +258,22 @@ def check_internet():
 def send():
     global sending, connected, w_custom, send_fps
     try:
+        send_a = datetime.datetime.now()
         client_socket.sendall(message)
         send_b = datetime.datetime.now()
         send_delta = send_b - send_a
         send_delta = float(send_delta.total_seconds())
-        send_a = datetime.datetime.now()
         if send_delta != 0:
             send_fps = int(1 / send_delta)
-            if w_custom < 300:
-                if send_fps > 15:
+            if 100 < w_custom < 300:
+                if send_fps > 2000:
                     w_custom = w_custom + 2
-                if send_fps < 15:
+                if send_fps < 2000:
                     w_custom = w_custom - 2    
             if w_custom == 300:
                 w_custom = w_custom - 2
+            if w_custom == 100:
+                w_custom = w_custom + 2
         else:
             pass
         
