@@ -68,6 +68,7 @@ internet = False
 checking_internet = False
 connected = False
 trying_to_connect = False
+init = False
 
 starting_vpn = False
 vpn = False
@@ -410,10 +411,12 @@ while True:
 
     if connected == False:
         socket_initialized = False
-        client_socket.close()
+        if init == True:
+            client_socket.close()
         
     if internet == True and socket_initialized == False:
         socket_initialize()
+        init = True
 
     if connected == False:
         try_connection()
