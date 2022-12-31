@@ -71,7 +71,9 @@ vpn = False
 
 sending = False
 
-w_custom = 500
+send_fps = 0
+
+w_custom = 200
 
 #methods
 def draw_line(x, y, direction, length, thickness, blue, green, red):
@@ -254,7 +256,7 @@ def check_internet():
 
 
 def send():
-    global sending, connected, w_custom
+    global sending, connected, w_custom, send_fps
     try:
         send_a = datetime.datetime.now()
         client_socket.sendall(message)
@@ -361,6 +363,9 @@ while True:
     fps = int(1 / delta)
     fps_str = str(fps) + "fps"
     cv2.putText(frame, fps_str, (225,24), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    cv2.putText(frame, str(send_fps), (225,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+    cv2.putText(frame, str(w_custom), (150,50), cv2.FONT_HERSHEY_SIMPLEX, fontsize, (0, 255, 0), 1)
+
     
     a = datetime.datetime.now()
 
