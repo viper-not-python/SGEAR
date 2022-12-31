@@ -266,18 +266,17 @@ def send():
         send_delta = float(send_delta.total_seconds())
         if send_delta != 0:
             send_fps = int(1 / send_delta)
-            if 100 < w_custom < 300:
+            if 100 < w_custom < 500:
                 if send_fps > 2000:
                     w_custom = w_custom + 2
                 if send_fps < 2000:
                     w_custom = w_custom - 2    
-            if w_custom == 300:
+            if w_custom == 500:
                 w_custom = w_custom - 2
             if w_custom == 100:
                 w_custom = w_custom + 2
         else:
             pass
-        w_custom = 175
         
     except:
         connected = False
