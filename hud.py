@@ -294,30 +294,21 @@ def thread_send():
     Thread(target=send).start()
 
 def vpn_active():
-    global vpn
+    global vpn, base
     while True:
 
 
         try:
             subprocess.check_output(["ping", "-c", "1", "192.168.170.1"])
             vpn = True
+            base = False
         except:
             vpn = False
-
-
-
-        time.sleep(2)
-
-def base_active():
-    global base
-    while True:
-
-
-        try:
-            subprocess.check_output(["ping", "-c", "1", "192.168.188.1"])
-            base = True
-        except:
-            base = False
+            try:
+                subprocess.check_output(["ping", "-c", "1", "192.168.188.1"])
+                base = True
+            except:
+                base = False
 
 
 
@@ -334,7 +325,6 @@ def reconnect_wifi():
     starting_vpn = False
 
 Thread(target=vpn_active).start()
-Thread(target=base_active).start()
 
 while True:
     ret, frame = stream.read()
