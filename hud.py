@@ -63,6 +63,7 @@ pic = False
 c_s = 0
 
 socket_initialized = False
+socket_initialized_base = False
 internet = False
 checking_internet = False
 
@@ -203,8 +204,11 @@ def socket_initialize():
     # Socket Create
     server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     host_name  = socket.gethostname()
+    
+    
     host_ip = '192.168.170.208'
 
+    
     port = 9999
     socket_address = (host_ip,port)
 
@@ -302,6 +306,21 @@ def vpn_active():
 
         time.sleep(2)
 
+def base_active():
+    global base
+    while True:
+
+
+        try:
+            subprocess.check_output(["ping", "-c", "1", "192.168.188.1"])
+            base = True
+        except:
+            base = False
+
+
+
+        time.sleep(2)
+
 def reconnect_wifi():
     global starting_vpn
     os.system("rfkill block wifi")
@@ -313,6 +332,7 @@ def reconnect_wifi():
     starting_vpn = False
 
 Thread(target=vpn_active).start()
+Thread(target=base_active).start()
 
 while True:
     ret, frame = stream.read()
@@ -396,8 +416,14 @@ while True:
     if internet == False:
         check_internet()
 
+    if connected == False:
+        socket_initialized = False
+        
     if internet == True and socket_initialized == False:
         socket_initialize()
+
+    if connected == False:
+        try_connection()
 
     if socket_initialized == True:
         frame = imutils.resize(frame,width=w_custom)
@@ -409,12 +435,15 @@ while True:
                     thread_send()
             except:
                 connected = False
-        else:
-            try_connection()
-
-    if vpn == False and starting_vpn == False and internet == True:
+            
+    if vpn == False and starting_vpn == False and internet == True and base == False:
         starting_vpn = True
         Thread(target=reconnect_wifi).start()
+
+    if base == True:
+        print("base")
+    if vpn == True:
+        print("vpn")
 
     if (cv2.waitKey(1)==ord("q")):
         break
