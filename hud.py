@@ -410,6 +410,7 @@ while True:
 
     if connected == False:
         socket_initialized = False
+        client_socket.close()
         
     if internet == True and socket_initialized == False:
         socket_initialize()
